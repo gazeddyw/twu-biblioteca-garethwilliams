@@ -17,10 +17,6 @@ public class BookTest {
     }
 
     @Test
-    public void listBooksTest() {
-    }
-
-    @Test
     public void testBookCreatedHasFieldsSetCorrectly() {
         assertEquals(myFirstBook.getTitle(), "Title");
         assertEquals(myFirstBook.getAuthor(), "Author");
@@ -29,22 +25,6 @@ public class BookTest {
     }
 
     @Test
-    public void testBookHasAuthor() {
-    }
-
-    @Test
-    public void testBookHasYearPublished () {
-    }
-
-    @Test
     public void testInvalidMenuOptionReturnsCorrectString() {
-    }
-
-    @Test
-    public void testCheckoutBookDecrementsBookList() {
-    }
-
-    @Test
-    public void testCheckinBookIncrementsBookList() {
     }
 }

@@ -21,7 +21,16 @@ public class LibraryTest {
     }
 
     @Test
-    public void test() {
-        assertEquals(1, 1);
+    public void testInitialLibraryBooksListIsEmpty() {
+        Library lib = new Library();
+        assertEquals(true, lib.getLibraryBookList().isEmpty());
+    }
+
+    @Test
+    public void testCheckoutBookDecrementsBookList() {
+    }
+
+    @Test
+    public void testCheckinBookIncrementsBookList() {
     }
 }
