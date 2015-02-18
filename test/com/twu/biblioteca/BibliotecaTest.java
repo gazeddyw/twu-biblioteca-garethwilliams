@@ -16,11 +16,12 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testBookCreation() {
-        Book myBook = new Book("Title", "Author", 2015);
+    public void testBookCreatedHasFieldsSetCorrectly() {
+        Book myBook = new Book("Title", "Author", 2015, false);
         assertEquals(myBook.getTitle(), "Title");
         assertEquals(myBook.getAuthor(), "Author");
         assertEquals(myBook.getYearPublished(), 2015);
+        assertEquals(myBook.isCheckedOut(), false);
     }
 
     @Test
