@@ -13,17 +13,25 @@ import static org.junit.Assert.assertEquals;
  */
 public class LibraryTest {
 
+    Library lib;
     private List<Book> libraryBooks;
     
     @Before
     public void setUp() throws Exception {
+        lib = new Library();
         libraryBooks = new ArrayList<Book>();
     }
 
     @Test
     public void testInitialLibraryBooksListIsEmpty() {
-        Library lib = new Library();
         assertEquals(true, lib.getLibraryBookList().isEmpty());
+    }
+
+    @Test
+    public void testAddBookToLibraryBooksList() {
+        Book book = new Book("Title", "Author", 2010);
+        lib.getLibraryBookList().add(book);
+        assertEquals(1, lib.getLibraryBookList().size());
     }
 
     @Test
