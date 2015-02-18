@@ -4,7 +4,7 @@ package com.twu.biblioteca;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class ExampleTest {
+public class BibliotecaTest {
 
     @Test
     public void test() {
@@ -17,6 +17,17 @@ public class ExampleTest {
 
     @Test
     public void testBookHasAuthorAndYearPublished() {
+    }
 
+    @Test
+    public void testInvalidMenuOptionReturnsCorrectString() {
+    }
+
+    @Test
+    public void testCheckoutBookDecrementsBookList() {
+    }
+
+    @Test
+    public void testCheckinBookIncrementsBookList() {
     }
 }
