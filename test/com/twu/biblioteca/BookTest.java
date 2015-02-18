@@ -9,16 +9,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class BookTest {
 
-    Book myFirstBook;
+    private Book myFirstBook;
 
     @Before
     public void setUp() throws Exception {
         myFirstBook = new Book("Title", "Author", 2015, false);
-    }
-
-    @Test
-    public void test() {
-        assertEquals(1, 1);
     }
 
     @Test
