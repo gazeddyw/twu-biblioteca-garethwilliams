@@ -14,11 +14,13 @@ import static org.junit.Assert.assertEquals;
 public class LibraryTest {
 
     Library lib;
+    String bookTitle;
 
     @Before
     public void setUp() throws Exception {
         lib = new Library();
         lib.initialiseLibraryBookList();
+        bookTitle = "Title 0";
     }
 
     @Test
@@ -40,9 +42,14 @@ public class LibraryTest {
 
     @Test
     public void testCheckInValidBook() {
-        String bookTitle = "Title 0";
         lib.getLibraryBookList().get(0).checkOut();
         assertEquals("Thank you for returning the book.", lib.validateBookForCheckIn(bookTitle));
+    }
+
+    @Test
+    public void testCheckInValidBookNotCheckedOut() {
+        lib.getLibraryBookList().get(1).checkOut();
+        assertEquals("This book is not currently checked out.", lib.validateBookForCheckIn(bookTitle));
     }
 
     @Test
