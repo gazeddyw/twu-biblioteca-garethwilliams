@@ -49,7 +49,7 @@ public class LibraryTest {
     @Test
     public void testCheckInValidBookNotCheckedOut() {
         lib.getLibraryBookList().get(1).checkOut();
-        assertEquals("This book is not currently checked out.", lib.validateBookForCheckIn(bookTitle));
+        assertEquals("That book is not currently checked out.", lib.validateBookForCheckIn(bookTitle));
     }
 
     @Test
