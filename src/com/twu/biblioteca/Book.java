@@ -45,11 +45,17 @@ public class Book {
         return checkedOut;
     }
 
-    public void checkOut() {
-        checkedOut = true;
+    public String checkOut() {
+        if (isCheckedOut()) {
+            return "This book is not available.";
+        } else {
+            checkedOut = true;
+            return "Thank you! Enjoy the book.";
+        }
     }
 
-    public void checkIn() {
+    public String checkIn() {
         checkedOut = false;
+        return "Thank you for returning the book.";
     }
 }

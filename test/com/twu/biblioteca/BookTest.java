@@ -27,13 +27,20 @@ public class BookTest {
 
     @Test
     public void testCheckOutBook() {
-        myFirstBook.checkOut();
+        assertEquals("Thank you! Enjoy the book.", myFirstBook.checkOut());
         assertEquals(true, myFirstBook.isCheckedOut());
     }
 
     @Test
+    public void testCheckOutBookAlreadyCheckedOut() {
+        myFirstBook.checkOut();
+        assertEquals("This book is not available.", myFirstBook.checkOut());
+    }
+
+    @Test
     public void testCheckInBook() {
-        myFirstBook.checkIn();
+        myFirstBook.checkOut();
+        assertEquals("Thank you for returning the book.", myFirstBook.checkIn());
         assertEquals(false, myFirstBook.isCheckedOut());
     }
 }

@@ -24,4 +24,8 @@ public class Library {
             libraryBookList.add(book);
         }
     }
+
+    public String validateBookForCheckIn(String title) {
+        return "That is not a valid book to return.";
+    }
 }

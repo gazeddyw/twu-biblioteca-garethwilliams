@@ -14,12 +14,11 @@ import static org.junit.Assert.assertEquals;
 public class LibraryTest {
 
     Library lib;
-    private List<Book> libraryBooks;
-    
+
     @Before
     public void setUp() throws Exception {
         lib = new Library();
-        libraryBooks = new ArrayList<Book>();
+        lib.initialiseLibraryBookList();
     }
 
     @Test
@@ -29,7 +28,6 @@ public class LibraryTest {
 
     @Test
     public void testInitialiseLibraryBookList() {
-        lib.initialiseLibraryBookList();
         assertEquals(10, lib.getLibraryBookList().size());
     }
 
@@ -37,14 +35,16 @@ public class LibraryTest {
     public void testAddBookToLibraryBooksList() {
         Book book = new Book("Title", "Author", 2010);
         lib.getLibraryBookList().add(book);
-        assertEquals(1, lib.getLibraryBookList().size());
+        assertEquals(11, lib.getLibraryBookList().size());
     }
 
     @Test
-    public void testCheckoutBookDecrementsBookList() {
+    public void testCheckInInvalidBook() {
+        String bookTitle = "Incorrect";
+        assertEquals("That is not a valid book to return.", lib.validateBookForCheckIn(bookTitle));
     }
 
     @Test
-    public void testCheckinBookIncrementsBookList() {
+    public void testFindBookByName() {
     }
 }
