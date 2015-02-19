@@ -17,4 +17,11 @@ public class Library {
     public List<Book> getLibraryBookList() {
         return libraryBookList;
     }
+
+    public void initialiseLibraryBookList() {
+        for (int i = 0; i < 10; i++) {
+            Book book = new Book("Title " + i, "Author " + i, i + 2000);
+            libraryBookList.add(book);
+        }
+    }
 }

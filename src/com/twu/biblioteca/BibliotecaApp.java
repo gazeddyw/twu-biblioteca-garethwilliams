@@ -7,8 +7,7 @@ public class BibliotecaApp {
     }
 
     private void start() {
-        Menu.printWelcomeMessage();
-        Menu.printMenu();
-        Menu.printMenuPrompt();
+        Library lib = new Library();
+        Menu.createMenu();
     }
 }

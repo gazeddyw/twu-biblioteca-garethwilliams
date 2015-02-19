@@ -28,6 +28,12 @@ public class LibraryTest {
     }
 
     @Test
+    public void testInitialiseLibraryBookList() {
+        lib.initialiseLibraryBookList();
+        assertEquals(10, lib.getLibraryBookList().size());
+    }
+
+    @Test
     public void testAddBookToLibraryBooksList() {
         Book book = new Book("Title", "Author", 2010);
         lib.getLibraryBookList().add(book);
