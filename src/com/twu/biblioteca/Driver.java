@@ -7,28 +7,45 @@ import java.util.Scanner;
  */
 public class Driver {
 
+    Scanner scanner;
+
     public void run() {
         printWelcomeMessage();
+        scanner = new Scanner(System.in);
 
         int menuChoice = 0;
         do {
             printMenu();
             printMenuPrompt();
-            Scanner in = new Scanner(System.in);
-            String input = in.nextLine();
+
+            String input = scanner.nextLine();
             try {
                 menuChoice = Integer.parseInt(input);
             } catch (NumberFormatException nfe) {
                 printInvalidMenuOptionMessage();
             }
-            if (menuChoice < 1 || menuChoice > 2) {
+            if (menuChoice < 1 || menuChoice > 4) {
                 printInvalidMenuOptionMessage();
             }
             if (menuChoice == 1) {
                 printBookList();
             }
-        } while (menuChoice != 2);
+            if (menuChoice == 2) {
+                checkOutBookPrompt();
+            }
+            if (menuChoice == 3) {
+                //checkInBookPrompt();
+            }
+        } while (menuChoice != 4);
+
         printGoodbyeMessage();
+    }
+
+    private void checkOutBookPrompt() {
+        System.out.println("Enter title of book to check out:");
+        String input = scanner.nextLine();
+        String message = Library.validateBookForCheckIn(input);
+        System.out.println(message);
     }
 
     private void printBookList() {
@@ -55,7 +72,9 @@ public class Driver {
 
     private void printMenu() {
         System.out.println("\t1 - List Library Books");
-        System.out.println("\t2 - Quit");
+        System.out.println("\t2 - Check Out Book");
+        System.out.println("\t3 - Check In Book");
+        System.out.println("\t4 - Quit");
         System.out.println();
     }
 

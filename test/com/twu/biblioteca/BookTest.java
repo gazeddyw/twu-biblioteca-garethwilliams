@@ -34,7 +34,7 @@ public class BookTest {
     @Test
     public void testCheckOutBookAlreadyCheckedOut() {
         myFirstBook.checkOut();
-        assertEquals("This book is not available.", myFirstBook.checkOut());
+        assertEquals("That book is currently checked out.", myFirstBook.checkOut());
     }
 
     @Test

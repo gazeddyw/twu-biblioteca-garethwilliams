@@ -47,7 +47,7 @@ public class Book {
 
     public String checkOut() {
         if (isCheckedOut()) {
-            return "This book is not available.";
+            return "That book is currently checked out.";
         } else {
             checkedOut = true;
             return "Thank you! Enjoy the book.";
