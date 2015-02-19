@@ -41,6 +41,13 @@ public class LibraryTest {
     }
 
     @Test
+    public void testCheckOutValidBookAlreadyCheckedOut() {
+        Library.validateBookForCheckOut(validBookTitle);
+        assertEquals("That book is currently checked out.",
+                Library.validateBookForCheckOut(validBookTitle));
+    }
+
+    @Test
     public void testCheckOutInvalidBookByName() {
         assertEquals("That book is not available.",
                 Library.validateBookForCheckOut(invalidBookTitle));

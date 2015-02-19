@@ -21,10 +21,10 @@ public class Driver {
             String input = scanner.nextLine();
             try {
                 menuChoice = Integer.parseInt(input);
+                if (menuChoice < 1 || menuChoice > 4) {
+                    printInvalidMenuOptionMessage();
+                }
             } catch (NumberFormatException nfe) {
-                printInvalidMenuOptionMessage();
-            }
-            if (menuChoice < 1 || menuChoice > 4) {
                 printInvalidMenuOptionMessage();
             }
             if (menuChoice == 1) {
@@ -34,26 +34,36 @@ public class Driver {
                 checkOutBookPrompt();
             }
             if (menuChoice == 3) {
-                //checkInBookPrompt();
+                checkInBookPrompt();
             }
         } while (menuChoice != 4);
 
         printGoodbyeMessage();
     }
 
+    private void checkInBookPrompt() {
+        System.out.println("Enter title of book to check in:");
+        String input = scanner.nextLine();
+        String message = Library.validateBookForCheckIn(input);
+        System.out.println(message + "\n");
+    }
+
     private void checkOutBookPrompt() {
         System.out.println("Enter title of book to check out:");
         String input = scanner.nextLine();
-        String message = Library.validateBookForCheckIn(input);
-        System.out.println(message);
+        String message = Library.validateBookForCheckOut(input);
+        System.out.println(message + "\n");
     }
 
     private void printBookList() {
         printBookListHeader();
         for (Book book : Library.getLibraryBookList()) {
-            System.out.println("\t" + book.getTitle() + "\t\t\t" +
-                    book.getAuthor() + "\t\t\t" + book.getYearPublished());
+            if (!book.isCheckedOut()) {
+                System.out.println("\t" + book.getTitle() + "\t\t\t" +
+                        book.getAuthor() + "\t\t\t" + book.getYearPublished());
+            }
         }
+        System.out.println("\n");
     }
 
     private void printBookListHeader() {
@@ -71,6 +81,7 @@ public class Driver {
     }
 
     private void printMenu() {
+        System.out.println("Options:\n");
         System.out.println("\t1 - List Library Books");
         System.out.println("\t2 - Check Out Book");
         System.out.println("\t3 - Check In Book");
