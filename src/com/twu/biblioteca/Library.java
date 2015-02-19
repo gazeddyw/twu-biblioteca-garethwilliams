@@ -8,13 +8,13 @@ import java.util.List;
  */
 public class Library {
 
-    private List<Book> libraryBookList;
+    private static List<Book> libraryBookList;
 
     public Library() {
         libraryBookList = new ArrayList<Book>();
     }
 
-    public List<Book> getLibraryBookList() {
+    public static List<Book> getLibraryBookList() {
         return libraryBookList;
     }
 

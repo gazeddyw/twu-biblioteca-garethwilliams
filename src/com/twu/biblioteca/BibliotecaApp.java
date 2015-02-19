@@ -3,11 +3,14 @@ package com.twu.biblioteca;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        new BibliotecaApp().start();
+        new BibliotecaApp().init();
     }
 
-    private void start() {
+    private void init() {
         Library lib = new Library();
-        Menu.createMenu();
+        lib.initialiseLibraryBookList();
+
+        Driver d = new Driver();
+        d.run();
     }
 }

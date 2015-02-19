@@ -26,6 +26,14 @@ public class BookTest {
     }
 
     @Test
-    public void testInvalidMenuOptionReturnsCorrectString() {
+    public void testCheckOutBook() {
+        myFirstBook.checkOut();
+        assertEquals(true, myFirstBook.isCheckedOut());
+    }
+
+    @Test
+    public void testCheckInBook() {
+        myFirstBook.checkIn();
+        assertEquals(false, myFirstBook.isCheckedOut());
     }
 }

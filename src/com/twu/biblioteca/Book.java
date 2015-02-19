@@ -45,7 +45,11 @@ public class Book {
         return checkedOut;
     }
 
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
+    public void checkOut() {
+        checkedOut = true;
+    }
+
+    public void checkIn() {
+        checkedOut = false;
     }
 }
