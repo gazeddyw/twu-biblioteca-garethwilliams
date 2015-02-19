@@ -39,6 +39,13 @@ public class LibraryTest {
     }
 
     @Test
+    public void testCheckInValidBook() {
+        String bookTitle = "Title 0";
+        lib.getLibraryBookList().get(0).checkOut();
+        assertEquals("Thank you for returning the book.", lib.validateBookForCheckIn(bookTitle));
+    }
+
+    @Test
     public void testCheckInInvalidBook() {
         String bookTitle = "Incorrect";
         assertEquals("That is not a valid book to return.", lib.validateBookForCheckIn(bookTitle));

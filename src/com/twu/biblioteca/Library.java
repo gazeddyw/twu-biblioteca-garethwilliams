@@ -26,6 +26,12 @@ public class Library {
     }
 
     public String validateBookForCheckIn(String title) {
+        for (int index = 0; index < getLibraryBookList().size(); index++) {
+            Book book = getLibraryBookList().get(index);
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book.checkIn();
+            }
+        }
         return "That is not a valid book to return.";
     }
 }
