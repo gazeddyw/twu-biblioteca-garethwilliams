@@ -29,4 +29,22 @@ public class Movie extends LibraryItem {
     public void setDirector(String director) {
         this.director = director;
     }
+
+    public String checkOut() {
+        if (isCheckedOut()) {
+            return "That movie is currently checked out.";
+        } else {
+            checkedOut = true;
+            return "Thank you! Enjoy the movie.";
+        }
+    }
+
+    public String checkIn() {
+        if (isCheckedOut()) {
+            checkedOut = false;
+            return "Thank you for returning the movie.";
+        } else {
+            return "That movie is not currently checked out.";
+        }
+    }
 }

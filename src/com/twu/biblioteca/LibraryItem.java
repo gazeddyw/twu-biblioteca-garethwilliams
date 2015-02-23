@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 /**
  * Created by Gareth Williams on 2/23/15.
  */
-public class LibraryItem {
+public abstract class LibraryItem {
 
     protected String title;
     protected boolean checkedOut;
@@ -23,28 +23,6 @@ public class LibraryItem {
         this.title = title;
     }
 
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
-    public String checkOut() {
-        if (isCheckedOut()) {
-            return "That " + itemType() + " is currently checked out.";
-        } else {
-            checkedOut = true;
-            return "Thank you! Enjoy the " + itemType() + ".";
-        }
-    }
-
-    public String checkIn() {
-        if (isCheckedOut()) {
-            checkedOut = false;
-            return "Thank you for returning the " + itemType() + ".";
-        } else {
-            return "That " + itemType() + " is not currently checked out.";
-        }
-    }
-
     public int getYearPublished() {
         return yearPublished;
     }
@@ -53,15 +31,11 @@ public class LibraryItem {
         this.yearPublished = yearPublished;
     }
 
-    private String itemType() {
-        if (this instanceof Book) {
-            return "book";
-        }
-        else if (this instanceof Movie) {
-            return "movie";
-        }
-        else {
-            return "item";
-        }
+    public boolean isCheckedOut() {
+        return checkedOut;
     }
+
+    public abstract String checkOut();
+
+    public abstract String checkIn();
 }
