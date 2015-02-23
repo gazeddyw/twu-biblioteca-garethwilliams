@@ -21,7 +21,7 @@ public class Driver {
             String input = scanner.nextLine();
             try {
                 menuChoice = Integer.parseInt(input);
-                if (menuChoice < 1 || menuChoice > 4) {
+                if (menuChoice < 1 || menuChoice > 5) {
                     printInvalidMenuOptionMessage();
                 }
             } catch (NumberFormatException nfe) {
@@ -31,12 +31,15 @@ public class Driver {
                 printBookList();
             }
             if (menuChoice == 2) {
-                checkOutBookPrompt();
+                printMovieList();
             }
             if (menuChoice == 3) {
+                checkOutBookPrompt();
+            }
+            if (menuChoice == 4) {
                 checkInBookPrompt();
             }
-        } while (menuChoice != 4);
+        } while (menuChoice != 5);
 
         printGoodbyeMessage();
     }
@@ -64,6 +67,9 @@ public class Driver {
             }
         }
         System.out.println("\n");
+    }
+
+    private void printMovieList() {
     }
 
     private void printBookListHeader() {
