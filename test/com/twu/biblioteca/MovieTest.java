@@ -26,4 +26,10 @@ public class MovieTest {
         assertEquals(myFirstMovie.getRating(), 10);
         assertFalse(myFirstMovie.isCheckedOut());
     }
+
+    @Test
+    public void testCheckOutMovie() {
+        assertEquals("Thank you! Enjoy the movie.", myFirstMovie.checkOut());
+        assertEquals(true, myFirstMovie.isCheckedOut());
+    }
 }

@@ -19,14 +19,6 @@ public class Movie {
         this.checkedOut = false;
     }
 
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
-    }
-
     public int getRating() {
         return rating;
     }
@@ -58,4 +50,19 @@ public class Movie {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
+
+    public String checkOut() {
+        if (isCheckedOut()) {
+            return "That movie is currently checked out.";
+        } else {
+            checkedOut = true;
+            return "Thank you! Enjoy the movie.";
+        }
+    }
+
+
 }
