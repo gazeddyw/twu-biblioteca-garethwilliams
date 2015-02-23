@@ -9,6 +9,7 @@ public class BibliotecaApp {
     private void init() {
         Library lib = new Library();
         lib.initialiseLibraryBookList();
+        lib.initialiseLibraryMovieList();
 
         Driver d = new Driver();
         d.run();

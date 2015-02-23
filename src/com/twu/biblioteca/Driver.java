@@ -70,12 +70,27 @@ public class Driver {
     }
 
     private void printMovieList() {
+        printMovieListHeader();
+        for (Movie movie : Library.getLibraryMovieList()) {
+            if (!movie.isCheckedOut()) {
+                System.out.println("\t" + movie.getTitle() + "\t\t\t" +
+                        movie.getDirector() + "\t\t\t" + movie.getYearPublished() +
+                        "\t\t\t\t\t" + movie.getRating());
+            }
+        }
+        System.out.println("\n");
     }
 
     private void printBookListHeader() {
         System.out.println("Currently available books:\n");
-        System.out.println("\tTitle\t\t\tAuthor\t\t\tYear Published");
-        System.out.println("\t-----\t\t\t------\t\t\t--------------");
+        System.out.println("\tTitle\t\t\tAuthor\t\t\t\tYear Published");
+        System.out.println("\t-----\t\t\t------\t\t\t\t--------------");
+    }
+
+    private void printMovieListHeader() {
+        System.out.println("Currently available movies:\n");
+        System.out.println("\tTitle\t\t\tDirector\t\t\tYear Published\t\t\tRating");
+        System.out.println("\t-----\t\t\t--------\t\t\t--------------\t\t\t------");
     }
 
     private void printGoodbyeMessage() {
@@ -89,9 +104,10 @@ public class Driver {
     private void printMenu() {
         System.out.println("Options:\n");
         System.out.println("\t1 - List Library Books");
-        System.out.println("\t2 - Check Out Book");
-        System.out.println("\t3 - Check In Book");
-        System.out.println("\t4 - Quit");
+        System.out.println("\t2 - List Library Movies");
+        System.out.println("\t3 - Check Out Book");
+        System.out.println("\t4 - Check In Book");
+        System.out.println("\t5 - Quit");
         System.out.println();
     }
 

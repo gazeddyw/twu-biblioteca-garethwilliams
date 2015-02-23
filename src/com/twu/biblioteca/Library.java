@@ -27,14 +27,14 @@ public class Library {
 
     public void initialiseLibraryBookList() {
         for (int i = 0; i < 10; i++) {
-            Book book = new Book("Title " + i, "Author " + i, i + 2000);
+            Book book = new Book("Book " + i, "Author " + i, i + 2000);
             libraryBookList.add(book);
         }
     }
 
     public void initialiseLibraryMovieList() {
         for (int i = 0; i < 10; i++) {
-            Movie movie = new Movie("Title " + i, i + 2000, "Director " + i, i + 1);
+            Movie movie = new Movie("Movie " + i, i + 2000, "Director " + i, i + 1);
             libraryMovieList.add(movie);
         }
     }
@@ -47,6 +47,16 @@ public class Library {
             }
         }
         return "That book is not available.";
+    }
+
+    public static String validateMovieForCheckOut(String title) {
+        for (int index = 0; index < getLibraryBookList().size(); index++) {
+            Movie movie = getLibraryMovieList().get(index);
+            if (movie.getTitle().equalsIgnoreCase(title)) {
+                return movie.checkOut();
+            }
+        }
+        return "That movie is not available.";
     }
 
     public static String validateBookForCheckIn(String title) {

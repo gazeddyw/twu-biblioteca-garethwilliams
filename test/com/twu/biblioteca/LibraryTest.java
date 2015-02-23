@@ -12,15 +12,17 @@ public class LibraryTest {
 
     Library lib;
     String validBookTitle;
-    String invalidBookTitle;
+    String validMovieTitle;
+    String invalidItemTitle;
 
     @Before
     public void setUp() throws Exception {
         lib = new Library();
         lib.initialiseLibraryBookList();
         lib.initialiseLibraryMovieList();
-        validBookTitle = "Title 0";
-        invalidBookTitle = "Invalid";
+        validBookTitle = "Book 0";
+        validMovieTitle = "Movie 0";
+        invalidItemTitle = "Invalid";
     }
 
     @Test
@@ -40,6 +42,12 @@ public class LibraryTest {
     }
 
     @Test
+    public void testCheckOutValidMovieByName() throws Exception {
+        assertEquals("Thank you! Enjoy the movie.",
+                Library.validateMovieForCheckOut(validMovieTitle));
+    }
+
+    @Test
     public void testCheckOutValidBookAlreadyCheckedOut() throws Exception {
         Library.validateBookForCheckOut(validBookTitle);
         assertEquals("That book is currently checked out.",
@@ -49,7 +57,7 @@ public class LibraryTest {
     @Test
     public void testCheckOutInvalidBookByName() throws Exception {
         assertEquals("That book is not available.",
-                Library.validateBookForCheckOut(invalidBookTitle));
+                Library.validateBookForCheckOut(invalidItemTitle));
     }
 
     @Test
