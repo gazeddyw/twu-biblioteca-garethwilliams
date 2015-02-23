@@ -65,4 +65,12 @@ public class Movie {
     }
 
 
+    public String checkIn() {
+        if (isCheckedOut()) {
+            checkedOut = false;
+            return "Thank you for returning the movie.";
+        } else {
+            return "That movie is not currently checked out.";
+        }
+    }
 }

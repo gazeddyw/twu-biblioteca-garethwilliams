@@ -32,4 +32,11 @@ public class MovieTest {
         assertEquals("Thank you! Enjoy the movie.", myFirstMovie.checkOut());
         assertEquals(true, myFirstMovie.isCheckedOut());
     }
+
+    @Test
+    public void testCheckInMovie() throws Exception {
+        myFirstMovie.checkOut();
+        assertEquals("Thank you for returning the movie.", myFirstMovie.checkIn());
+        assertEquals(false, myFirstMovie.isCheckedOut());
+    }
 }
