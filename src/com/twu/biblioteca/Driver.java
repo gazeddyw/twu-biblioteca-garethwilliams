@@ -7,6 +7,10 @@ import java.util.Scanner;
  */
 public class Driver {
 
+    private static final int MIN_MENU_CHOICE = 1;
+    private static final int MAX_MENU_CHOICE = 5;
+    private static final int MAX_LOANS_MENU_CHOICE = 3;
+
     Scanner scanner;
 
     public void run() {
@@ -17,16 +21,8 @@ public class Driver {
         do {
             printMenu();
             printMenuPrompt();
+            menuChoice = getUserMenuSelection(MIN_MENU_CHOICE, MAX_MENU_CHOICE);
 
-            String input = scanner.nextLine();
-            try {
-                menuChoice = Integer.parseInt(input);
-                if (menuChoice < 1 || menuChoice > 5) {
-                    printInvalidMenuOptionMessage();
-                }
-            } catch (NumberFormatException nfe) {
-                printInvalidMenuOptionMessage();
-            }
             if (menuChoice == 1) {
                 printBookList();
             }
@@ -34,27 +30,93 @@ public class Driver {
                 printMovieList();
             }
             if (menuChoice == 3) {
-                checkOutBookPrompt();
+                handleCheckOut();
             }
             if (menuChoice == 4) {
-                checkInBookPrompt();
+                handleCheckIn();
             }
-        } while (menuChoice != 5);
+        } while (menuChoice != MAX_MENU_CHOICE);
 
         printGoodbyeMessage();
     }
 
-    private void checkInBookPrompt() {
-        System.out.println("Enter title of book to check in:");
+    private int getUserMenuSelection(int minMenuChoice, int maxMenuChoice) {
         String input = scanner.nextLine();
-        String message = Library.validateBookForCheckIn(input);
+        int result = 0;
+        try {
+            result = Integer.parseInt(input);
+            if (result < minMenuChoice || result > maxMenuChoice) {
+                printInvalidMenuOptionMessage();
+            }
+        } catch (NumberFormatException nfe) {
+            printInvalidMenuOptionMessage();
+        }
+        return result;
+    }
+
+    private void handleCheckOut() {
+        int loansMenuChoice = 0;
+        do {
+            printLoansMenu();
+            printMenuPrompt();
+            loansMenuChoice = getUserMenuSelection(MIN_MENU_CHOICE, MAX_LOANS_MENU_CHOICE);
+            if (loansMenuChoice == 1) {
+                showCheckOutBookPrompt();
+            }
+            if (loansMenuChoice == 2) {
+                showCheckOutMoviePrompt();
+            }
+        } while (loansMenuChoice != MAX_LOANS_MENU_CHOICE);
+    }
+
+    private void handleCheckIn() {
+        int loansMenuChoice = 0;
+        do {
+            printLoansMenu();
+            printMenuPrompt();
+            loansMenuChoice = getUserMenuSelection(MIN_MENU_CHOICE, MAX_LOANS_MENU_CHOICE);
+            if (loansMenuChoice == 1) {
+                showCheckInBookPrompt();
+            }
+            if (loansMenuChoice == 2) {
+                showCheckInMoviePrompt();
+            }
+        } while (loansMenuChoice != MAX_LOANS_MENU_CHOICE);
+    }
+
+    private void printLoansMenu() {
+        System.out.println("Item type:\n");
+        System.out.println("\t1 - Book");
+        System.out.println("\t2 - Movie");
+        System.out.println("\t3 - Main Menu");
+        System.out.println();
+    }
+
+    private void showCheckOutBookPrompt() {
+        System.out.println("Enter title of book to check out:");
+        String input = scanner.nextLine();
+        String message = Library.validateAndCheckOutBook(input);
         System.out.println(message + "\n");
     }
 
-    private void checkOutBookPrompt() {
-        System.out.println("Enter title of book to check out:");
+    private void showCheckOutMoviePrompt() {
+        System.out.println("Enter title of movie to check out:");
         String input = scanner.nextLine();
-        String message = Library.validateBookForCheckOut(input);
+        String message = Library.validateAndCheckOutMovie(input);
+        System.out.println(message + "\n");
+    }
+
+    private void showCheckInBookPrompt() {
+        System.out.println("Enter title of book to check in:");
+        String input = scanner.nextLine();
+        String message = Library.validateAndCheckInBook(input);
+        System.out.println(message + "\n");
+    }
+
+    private void showCheckInMoviePrompt() {
+        System.out.println("Enter title of movie to check out:");
+        String input = scanner.nextLine();
+        String message = Library.validateAndCheckInMovie(input);
         System.out.println(message + "\n");
     }
 
@@ -105,8 +167,8 @@ public class Driver {
         System.out.println("Options:\n");
         System.out.println("\t1 - List Library Books");
         System.out.println("\t2 - List Library Movies");
-        System.out.println("\t3 - Check Out Book");
-        System.out.println("\t4 - Check In Book");
+        System.out.println("\t3 - Check Out Item");
+        System.out.println("\t4 - Check In Item");
         System.out.println("\t5 - Quit");
         System.out.println();
     }
