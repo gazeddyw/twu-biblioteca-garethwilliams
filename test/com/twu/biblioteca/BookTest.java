@@ -18,7 +18,7 @@ public class BookTest {
     }
 
     @Test
-    public void testBookCreatedHasFieldsSetCorrectly() {
+    public void testBookCreatedHasFieldsSetCorrectly() throws Exception {
         assertEquals(myFirstBook.getTitle(), "Title");
         assertEquals(myFirstBook.getAuthor(), "Author");
         assertEquals(myFirstBook.getYearPublished(), 2015);
@@ -26,19 +26,19 @@ public class BookTest {
     }
 
     @Test
-    public void testCheckOutBook() {
+    public void testCheckOutBook() throws Exception {
         assertEquals("Thank you! Enjoy the book.", myFirstBook.checkOut());
         assertEquals(true, myFirstBook.isCheckedOut());
     }
 
     @Test
-    public void testCheckOutBookAlreadyCheckedOut() {
+    public void testCheckOutBookAlreadyCheckedOut() throws Exception {
         myFirstBook.checkOut();
         assertEquals("That book is currently checked out.", myFirstBook.checkOut());
     }
 
     @Test
-    public void testCheckInBook() {
+    public void testCheckInBook() throws Exception {
         myFirstBook.checkOut();
         assertEquals("Thank you for returning the book.", myFirstBook.checkIn());
         assertEquals(false, myFirstBook.isCheckedOut());

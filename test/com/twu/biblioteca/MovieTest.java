@@ -19,7 +19,7 @@ public class MovieTest {
     }
 
     @Test
-    public void testMovieCreatedHasFieldsSetCorrectly() {
+    public void testMovieCreatedHasFieldsSetCorrectly() throws Exception {
         assertEquals(myFirstMovie.getTitle(), "Title");
         assertEquals(myFirstMovie.getYearPublished(), 2015);
         assertEquals(myFirstMovie.getDirector(), "Director");
@@ -28,9 +28,15 @@ public class MovieTest {
     }
 
     @Test
-    public void testCheckOutMovie() {
+    public void testCheckOutMovie() throws Exception {
         assertEquals("Thank you! Enjoy the movie.", myFirstMovie.checkOut());
         assertEquals(true, myFirstMovie.isCheckedOut());
+    }
+
+    @Test
+    public void testCheckOutMovieAlreadyCheckedOut() throws Exception {
+        myFirstMovie.checkOut();
+        assertEquals("That movie is currently checked out.", myFirstMovie.checkOut());
     }
 
     @Test
