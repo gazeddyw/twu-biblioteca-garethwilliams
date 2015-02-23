@@ -50,7 +50,7 @@ public class Library {
     }
 
     public static String validateMovieForCheckOut(String title) {
-        for (int index = 0; index < getLibraryBookList().size(); index++) {
+        for (int index = 0; index < getLibraryMovieList().size(); index++) {
             Movie movie = getLibraryMovieList().get(index);
             if (movie.getTitle().equalsIgnoreCase(title)) {
                 return movie.checkOut();
@@ -67,5 +67,15 @@ public class Library {
             }
         }
         return "That is not a valid book to return.";
+    }
+
+    public static String validateMovieForCheckIn(String title) {
+        for (int index = 0; index < getLibraryMovieList().size(); index++) {
+            Movie movie = getLibraryMovieList().get(index);
+            if (movie.getTitle().equalsIgnoreCase(title)) {
+                return movie.checkIn();
+            }
+        }
+        return "That is not a valid movie to return.";
     }
 }

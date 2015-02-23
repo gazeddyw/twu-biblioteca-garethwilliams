@@ -55,26 +55,61 @@ public class LibraryTest {
     }
 
     @Test
+    public void testCheckOutValidMovieAlreadyCheckedOut() throws Exception {
+        Library.validateMovieForCheckOut(validMovieTitle);
+        assertEquals("That movie is currently checked out.",
+                Library.validateMovieForCheckOut(validMovieTitle));
+    }
+
+    @Test
     public void testCheckOutInvalidBookByName() throws Exception {
         assertEquals("That book is not available.",
                 Library.validateBookForCheckOut(invalidItemTitle));
     }
 
     @Test
+    public void testCheckOutInvalidMovieByName() throws Exception {
+        assertEquals("That movie is not available.",
+                Library.validateMovieForCheckOut(invalidItemTitle));
+    }
+
+    @Test
     public void testCheckInValidBook() throws Exception {
         Library.getLibraryBookList().get(0).checkOut();
-        assertEquals("Thank you for returning the book.", Library.validateBookForCheckIn(validBookTitle));
+        assertEquals("Thank you for returning the book.",
+                Library.validateBookForCheckIn(validBookTitle));
+    }
+
+    @Test
+    public void testCheckInValidMovie() throws Exception {
+        Library.getLibraryMovieList().get(0).checkOut();
+        assertEquals("Thank you for returning the movie.",
+                Library.validateMovieForCheckIn(validMovieTitle));
     }
 
     @Test
     public void testCheckInValidBookNotCheckedOut() throws Exception {
         Library.getLibraryBookList().get(1).checkOut();
-        assertEquals("That book is not currently checked out.", Library.validateBookForCheckIn(validBookTitle));
+        assertEquals("That book is not currently checked out.",
+                Library.validateBookForCheckIn(validBookTitle));
+    }
+
+    @Test
+    public void testCheckInValidMovieNotCheckedOut() throws Exception {
+        Library.getLibraryMovieList().get(1).checkOut();
+        assertEquals("That movie is not currently checked out.",
+                Library.validateMovieForCheckIn(validMovieTitle));
     }
 
     @Test
     public void testCheckInInvalidBook() throws Exception {
-        String bookTitle = "Incorrect";
-        assertEquals("That is not a valid book to return.", Library.validateBookForCheckIn(bookTitle));
+        assertEquals("That is not a valid book to return.",
+                Library.validateBookForCheckIn(invalidItemTitle));
+    }
+
+    @Test
+    public void testCheckInInvalidMovie() throws Exception {
+        assertEquals("That is not a valid movie to return.",
+                Library.validateMovieForCheckIn(invalidItemTitle));
     }
 }
