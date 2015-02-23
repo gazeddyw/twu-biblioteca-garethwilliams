@@ -10,18 +10,32 @@ public class Library {
 
     private static List<Book> libraryBookList;
 
+    private static List<Movie> libraryMovieList;
+
     public Library() {
         libraryBookList = new ArrayList<Book>();
+        libraryMovieList = new ArrayList<Movie>();
     }
 
     public static List<Book> getLibraryBookList() {
         return libraryBookList;
     }
 
+    public static List<Movie> getLibraryMovieList() {
+        return libraryMovieList;
+    }
+
     public void initialiseLibraryBookList() {
         for (int i = 0; i < 10; i++) {
             Book book = new Book("Title " + i, "Author " + i, i + 2000);
             libraryBookList.add(book);
+        }
+    }
+
+    public void initialiseLibraryMovieList() {
+        for (int i = 0; i < 10; i++) {
+            Movie movie = new Movie("Title " + i, i + 2000, "Director " + i, i + 1);
+            libraryMovieList.add(movie);
         }
     }
 
