@@ -28,13 +28,6 @@ public class LibraryTest {
     }
 
     @Test
-    public void testAddBookToLibraryBooksList() {
-        Book book = new Book("Title", "Author", 2010);
-        Library.getLibraryBookList().add(book);
-        assertEquals(11, Library.getLibraryBookList().size());
-    }
-
-    @Test
     public void testCheckOutValidBookByName() {
         assertEquals("Thank you! Enjoy the book.",
                 Library.validateBookForCheckOut(validBookTitle));
