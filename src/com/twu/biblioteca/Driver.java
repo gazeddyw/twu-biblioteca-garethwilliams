@@ -14,9 +14,21 @@ public class Driver {
     Scanner scanner;
 
     public void run() {
-        printWelcomeMessage();
         scanner = new Scanner(System.in);
 
+        handleLogIn();
+
+        showMainMenu();
+    }
+
+    private void handleLogIn() {
+        do {
+            System.out.println("Enter User Name:");
+        } while();
+    }
+
+    private void showMainMenu() {
+        printWelcomeMessage();
         int menuChoice = 0;
         do {
             printMenu();
@@ -36,7 +48,6 @@ public class Driver {
                 handleCheckIn();
             }
         } while (menuChoice != MAX_MENU_CHOICE);
-
         printGoodbyeMessage();
     }
 
