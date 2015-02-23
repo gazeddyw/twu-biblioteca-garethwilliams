@@ -24,11 +24,11 @@ public class UserTest {
 
     @Test
     public void testUserHasCorrectEmail() throws Exception {
-        myFirstUser.getEmail();
+        assertEquals("Email", myFirstUser.getEmail());
     }
 
     @Test
     public void testUserHasCorrectPhoneNumber() throws Exception {
-        myFirstUser.getPhoneNumber();
+        assertEquals("Phone", myFirstUser.getPhoneNumber());
     }
 }
