@@ -5,14 +5,20 @@ package com.twu.biblioteca;
  */
 public class User {
 
+    private String libraryNumber;
     private String name;
     private String email;
     private String phoneNumber;
 
-    public User(String name, String email, String phoneNumber) {
+    public User(String libraryNumber, String name, String email, String phoneNumber) {
+        this.libraryNumber = libraryNumber;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getLibraryNumber() {
+        return libraryNumber;
     }
 
     public String getName() {

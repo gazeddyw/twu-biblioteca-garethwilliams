@@ -14,7 +14,16 @@ public class UserTest {
 
     @Before
     public void setUp() throws Exception {
-        myFirstUser = new User("User One", "Email", "Phone");
+        myFirstUser = new User("123-4567", "User One", "Email", "Phone");
+    }
+
+    @Test
+    public void testUserHasCorrectLibraryNumber() throws Exception {
+        assertEquals("123-4567", myFirstUser.getLibraryNumber());
+    }
+
+    @Test
+    public void testUserHasCorrectPassword() throws Exception {
     }
 
     @Test
