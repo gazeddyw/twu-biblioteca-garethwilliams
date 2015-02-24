@@ -14,7 +14,7 @@ public class UserTest {
 
     @Before
     public void setUp() throws Exception {
-        myFirstUser = new User("123-4567", "User One", "Email", "Phone");
+        myFirstUser = new User("123-4567", "password1", "User One", "Email", "Phone");
     }
 
     @Test
@@ -24,6 +24,7 @@ public class UserTest {
 
     @Test
     public void testUserHasCorrectPassword() throws Exception {
+        assertEquals("password1", myFirstUser.getPassword());
     }
 
     @Test

@@ -46,7 +46,8 @@ public class Library {
 
     public void initialiseLibraryUserList() {
         for (int i = 0; i < 2; i++) {
-            User user = new User("123-4567", "Test User " + i, "test" + i + "@test.com", "01234567890");
+            User user = new User("123-4567", "password" + i,
+                    "Test User " + i, "test" + i + "@test.com", "01234567890");
             libraryUserList.add(user);
         }
     }
