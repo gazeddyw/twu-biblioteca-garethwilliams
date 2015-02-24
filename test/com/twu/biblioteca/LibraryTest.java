@@ -20,6 +20,7 @@ public class LibraryTest {
         lib = new Library();
         lib.initialiseLibraryBookList();
         lib.initialiseLibraryMovieList();
+        lib.initialiseLibraryUserList();
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
@@ -33,6 +34,11 @@ public class LibraryTest {
     @Test
     public void testInitialiseLibraryMovieList() throws Exception {
         assertEquals(10, Library.getLibraryMovieList().size());
+    }
+
+    @Test
+    public void testInitialiseLibraryUserList() throws Exception {
+        assertEquals(2, Library.getLibraryUserList().size());
     }
 
     @Test

@@ -22,9 +22,10 @@ public class Driver {
     }
 
     private void handleLogIn() {
-        do {
-            System.out.println("Enter User Name:");
-        } while();
+//        do {
+//            System.out.println("Enter Library Number (form: xxx-xxxx):");
+//
+//        } while();
     }
 
     private void showMainMenu() {

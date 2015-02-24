@@ -9,12 +9,13 @@ import java.util.List;
 public class Library {
 
     private static List<Book> libraryBookList;
-
     private static List<Movie> libraryMovieList;
+    private static List<User> libraryUserList;
 
     public Library() {
         libraryBookList = new ArrayList<Book>();
         libraryMovieList = new ArrayList<Movie>();
+        libraryUserList = new ArrayList<User>();
     }
 
     public static List<Book> getLibraryBookList() {
@@ -23,6 +24,10 @@ public class Library {
 
     public static List<Movie> getLibraryMovieList() {
         return libraryMovieList;
+    }
+
+    public static List<User> getLibraryUserList() {
+        return libraryUserList;
     }
 
     public void initialiseLibraryBookList() {
@@ -36,6 +41,13 @@ public class Library {
         for (int i = 0; i < 10; i++) {
             Movie movie = new Movie("Movie " + i, i + 2000, "Director " + i, i + 1);
             libraryMovieList.add(movie);
+        }
+    }
+
+    public void initialiseLibraryUserList() {
+        for (int i = 0; i < 2; i++) {
+            User user = new User("Test User " + i, "test" + i + "@test.com", "01234567890");
+            libraryUserList.add(user);
         }
     }
 
