@@ -62,6 +62,14 @@ public class Library {
         return "Invalid library number";
     }
 
+    public static String validateUserCredentials(User user, String password) {
+        if (user.getPassword().equals(password)) {
+            return "User logged in";
+        } else {
+            return "Login failed";
+        }
+    }
+
     public static String validateAndCheckOutBook(String title) {
         for (int index = 0; index < getLibraryBookList().size(); index++) {
             Book book = getLibraryBookList().get(index);
