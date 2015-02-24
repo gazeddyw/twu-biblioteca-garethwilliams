@@ -52,6 +52,16 @@ public class Library {
         }
     }
 
+    public static String validateLibraryNumber(String libNumber) {
+        for (int index = 0; index < getLibraryUserList().size(); index++) {
+            User user = getLibraryUserList().get(index);
+            if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
+                return "Valid library number";
+            }
+        }
+        return "Invalid library number";
+    }
+
     public static String validateAndCheckOutBook(String title) {
         for (int index = 0; index < getLibraryBookList().size(); index++) {
             Book book = getLibraryBookList().get(index);

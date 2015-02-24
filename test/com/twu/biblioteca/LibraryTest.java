@@ -42,6 +42,16 @@ public class LibraryTest {
     }
 
     @Test
+    public void testValidateCorrectLibraryNumber() throws Exception {
+        assertEquals("Valid library number", Library.validateLibraryNumber("123-4567"));
+    }
+
+    @Test
+    public void testValidateIncorrectLibraryNumber() throws Exception {
+        assertEquals("Invalid library number", Library.validateLibraryNumber("1234567"));
+    }
+
+    @Test
     public void testCheckOutValidBookByName() throws Exception {
         assertEquals("Thank you! Enjoy the book.",
                 Library.validateAndCheckOutBook(validBookTitle));
