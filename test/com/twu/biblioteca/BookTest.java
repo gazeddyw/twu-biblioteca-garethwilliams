@@ -26,19 +26,19 @@ public class BookTest {
     }
 
     @Test
-    public void testCheckOutBook() throws Exception {
+    public void shouldCheckOutBook() throws Exception {
         assertEquals("Thank you! Enjoy the book.", myFirstBook.checkOut());
         assertEquals(true, myFirstBook.isCheckedOut());
     }
 
     @Test
-    public void testCheckOutBookAlreadyCheckedOut() throws Exception {
+    public void shouldNotCheckOutBookAlreadyCheckedOut() throws Exception {
         myFirstBook.checkOut();
         assertEquals("That book is currently checked out.", myFirstBook.checkOut());
     }
 
     @Test
-    public void testCheckInBook() throws Exception {
+    public void shouldCheckInBook() throws Exception {
         myFirstBook.checkOut();
         assertEquals("Thank you for returning the book.", myFirstBook.checkIn());
         assertEquals(false, myFirstBook.isCheckedOut());

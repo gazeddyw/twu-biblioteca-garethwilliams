@@ -11,10 +11,12 @@ public class Driver {
     private static final int MAX_MENU_CHOICE = 6;
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
+    Library library;
     Scanner scanner;
     User currentUser;
 
     public void run() {
+        library = new Library(new LibraryLists());
         scanner = new Scanner(System.in);
 
         while(true) {
