@@ -45,11 +45,12 @@ public class Library {
     }
 
     public void initialiseLibraryUserList() {
-        for (int i = 0; i < 2; i++) {
-            User user = new User("123-4567", "password" + i,
-                    "Test User " + i, "test" + i + "@test.com", "01234567890");
-            libraryUserList.add(user);
-        }
+        User user = new User("123-4567", "password0",
+                "Test User 0", "test0@test.com", "01234012340");
+        libraryUserList.add(user);
+        user = new User("234-5678", "password1",
+                "Test User 1", "test1@test.com", "06789567890");
+        libraryUserList.add(user);
     }
 
     public static boolean validateLibraryNumber(String libNumber) {
