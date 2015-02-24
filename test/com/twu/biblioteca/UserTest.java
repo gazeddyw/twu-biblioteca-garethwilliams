@@ -41,4 +41,8 @@ public class UserTest {
     public void testUserHasCorrectPhoneNumber() throws Exception {
         assertEquals("Phone", myFirstUser.getPhoneNumber());
     }
+
+    @Test
+    public void testUserCheckOutAddsBookToList() throws Exception {
+    }
 }

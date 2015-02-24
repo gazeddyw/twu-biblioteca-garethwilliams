@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Driver {
 
     private static final int MIN_MENU_CHOICE = 1;
-    private static final int MAX_MENU_CHOICE = 5;
+    private static final int MAX_MENU_CHOICE = 6;
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
     Scanner scanner;
@@ -71,8 +71,19 @@ public class Driver {
             if (menuChoice == 4) {
                 handleCheckIn();
             }
+            if (menuChoice == 5) {
+                printUserDetails();
+            }
         } while (menuChoice != MAX_MENU_CHOICE);
         printGoodbyeMessage();
+    }
+
+    private void printUserDetails() {
+        System.out.println("Your details:\n");
+        System.out.println("Name:\t\t\t" + currentUser.getName());
+        System.out.println("Email:\t\t\t" + currentUser.getEmail());
+        System.out.println("Phone:\t\t\t" + currentUser.getPhoneNumber());
+        System.out.println();
     }
 
     private int getUserMenuSelection(int minMenuChoice, int maxMenuChoice) {
@@ -204,7 +215,8 @@ public class Driver {
         System.out.println("\t2 - List Library Movies");
         System.out.println("\t3 - Check Out Item");
         System.out.println("\t4 - Check In Item");
-        System.out.println("\t5 - Quit");
+        System.out.println("\t5 - Show Contact Details");
+        System.out.println("\t6 - Quit");
         System.out.println();
     }
 
