@@ -17,31 +17,37 @@ public class Driver {
     public void run() {
         scanner = new Scanner(System.in);
 
-        handleLogIn();
-
-        showMainMenu();
+        while(true) {
+            handleLogIn();
+            showMainMenu();
+        }
     }
 
     private void handleLogIn() {
         boolean correctLibNumber = false;
         boolean correctPassword = false;
+        String libNumber;
+        String password;
 
         do {
             currentUser = null;
             System.out.println("Please enter Library Number (form: xxx-xxxx):");
-            String libNumber = getUserLibraryNumberFromInput();
+            libNumber = getUserStringInput();
             correctLibNumber = Library.validateLibraryNumber(libNumber);
             if (!correctLibNumber) {
                 System.out.println("Incorrect Library Number");
             }
         } while(!correctLibNumber);
-
+        currentUser = Library.findUserByLibraryNumber(libNumber);
         do {
-
+            System.out.println("Password:");
+            password = getUserStringInput();
+            correctPassword = Library.validateUserCredentials(currentUser, password);
         } while (!correctPassword);
+        System.out.println();
     }
 
-    private String getUserLibraryNumberFromInput() {
+    private String getUserStringInput() {
         return scanner.nextLine();
     }
 

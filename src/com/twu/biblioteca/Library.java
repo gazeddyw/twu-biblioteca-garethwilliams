@@ -72,11 +72,11 @@ public class Library {
         return null;
     }
 
-    public static String validateUserCredentials(User user, String password) {
+    public static boolean validateUserCredentials(User user, String password) {
         if (user.getPassword().equals(password)) {
-            return "User logged in";
+            return true;
         } else {
-            return "Login failed";
+            return false;
         }
     }
 

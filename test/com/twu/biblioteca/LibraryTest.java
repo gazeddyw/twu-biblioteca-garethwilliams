@@ -62,14 +62,14 @@ public class LibraryTest {
     public void testValidateUserWithCorrectCredentials() throws Exception {
         User user = Library.getLibraryUserList().get(0);
         String password = user.getPassword();
-        assertEquals("User logged in", Library.validateUserCredentials(user, password));
+        assertTrue(Library.validateUserCredentials(user, password));
     }
 
     @Test
     public void testValidateUserWithIncorrectCredentials() throws Exception {
         User user = Library.getLibraryUserList().get(0);
         String incorrectPass = "incorrect_pass";
-        assertEquals("Login failed", Library.validateUserCredentials(user, incorrectPass));
+        assertFalse(Library.validateUserCredentials(user, incorrectPass));
     }
 
     @Test
