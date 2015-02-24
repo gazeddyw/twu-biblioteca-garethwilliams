@@ -12,6 +12,7 @@ public class Driver {
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
     Scanner scanner;
+    User currentUser;
 
     public void run() {
         scanner = new Scanner(System.in);
@@ -22,10 +23,26 @@ public class Driver {
     }
 
     private void handleLogIn() {
-//        do {
-//            System.out.println("Enter Library Number (form: xxx-xxxx):");
-//
-//        } while();
+        boolean correctLibNumber = false;
+        boolean correctPassword = false;
+
+        do {
+            currentUser = null;
+            System.out.println("Please enter Library Number (form: xxx-xxxx):");
+            String libNumber = getUserLibraryNumberFromInput();
+            correctLibNumber = Library.validateLibraryNumber(libNumber);
+            if (!correctLibNumber) {
+                System.out.println("Incorrect Library Number");
+            }
+        } while(!correctLibNumber);
+
+        do {
+
+        } while (!correctPassword);
+    }
+
+    private String getUserLibraryNumberFromInput() {
+        return scanner.nextLine();
     }
 
     private void showMainMenu() {

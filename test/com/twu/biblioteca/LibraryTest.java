@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Gareth Williams on 2/18/15.
@@ -43,12 +45,17 @@ public class LibraryTest {
 
     @Test
     public void testValidateCorrectLibraryNumber() throws Exception {
-        assertEquals("Valid library number", Library.validateLibraryNumber("123-4567"));
+        assertTrue(Library.validateLibraryNumber("123-4567"));
     }
 
     @Test
     public void testValidateIncorrectLibraryNumber() throws Exception {
-        assertEquals("Invalid library number", Library.validateLibraryNumber("1234567"));
+        assertFalse(Library.validateLibraryNumber("1234567"));
+    }
+
+    @Test
+    public void testFindUserByLibraryNumber() throws Exception {
+        assertEquals(Library.getLibraryUserList().get(0), Library.findUserByLibraryNumber("123-4567"));
     }
 
     @Test

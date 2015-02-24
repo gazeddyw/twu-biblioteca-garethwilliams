@@ -52,14 +52,24 @@ public class Library {
         }
     }
 
-    public static String validateLibraryNumber(String libNumber) {
+    public static boolean validateLibraryNumber(String libNumber) {
         for (int index = 0; index < getLibraryUserList().size(); index++) {
             User user = getLibraryUserList().get(index);
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
-                return "Valid library number";
+                return true;
             }
         }
-        return "Invalid library number";
+        return false;
+    }
+
+    public static User findUserByLibraryNumber(String libNumber) {
+        for (int index = 0; index < getLibraryUserList().size(); index++) {
+            User user = getLibraryUserList().get(index);
+            if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public static String validateUserCredentials(User user, String password) {
