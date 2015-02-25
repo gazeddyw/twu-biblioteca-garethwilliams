@@ -27,8 +27,7 @@ public class Library {
     }
 
     public boolean validateLibraryNumber(String libNumber) {
-        for (int index = 0; index < getLibraryUserList().size(); index++) {
-            User user = getLibraryUserList().get(index);
+        for (User user : getLibraryUserList()) {
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
                 return true;
             }
@@ -37,8 +36,7 @@ public class Library {
     }
 
     public User findUserByLibraryNumber(String libNumber) {
-        for (int index = 0; index < getLibraryUserList().size(); index++) {
-            User user = getLibraryUserList().get(index);
+        for (User user : getLibraryUserList()) {
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
                 return user;
             }
