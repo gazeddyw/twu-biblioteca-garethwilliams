@@ -16,14 +16,12 @@ import static org.junit.Assert.assertTrue;
  */
 public class LibraryTest {
 
-    Library library;
     String validBookTitle;
     String validMovieTitle;
     String invalidItemTitle;
 
     @Before
     public void setUp() throws Exception {
-        library = new Library(new LibraryLists());
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
@@ -33,39 +31,48 @@ public class LibraryTest {
     public void shouldValidateCorrectLibraryNumber() throws Exception {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateLibraryNumber("123-4567")).thenReturn(true);
-        mockLibrary.validateLibraryNumber("123-4567");
-        verify(mockLibrary).validateLibraryNumber("123-4567");
-
         assertTrue(mockLibrary.validateLibraryNumber("123-4567"));
+        verify(mockLibrary).validateLibraryNumber("123-4567");
     }
 
     @Test
     public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateLibraryNumber("1234567")).thenReturn(false);
-        mockLibrary.validateLibraryNumber("1234567");
-        verify(mockLibrary).validateLibraryNumber("1234567");
-
         assertFalse(mockLibrary.validateLibraryNumber("1234567"));
+        verify(mockLibrary).validateLibraryNumber("1234567");
     }
 
     @Test
     public void shouldFindUserByLibraryNumberWithCorrectNumber() throws Exception {
-        assertEquals(Library.getLibraryUserList().get(0), library.findUserByLibraryNumber("123-4567"));
+        User testUser = new User("123-4567", "", "", "", "");
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.findUserByLibraryNumber("123-4567")).thenReturn(testUser);
+        assertEquals(testUser, mockLibrary.findUserByLibraryNumber("123-4567"));
+        verify(mockLibrary).findUserByLibraryNumber("123-4567");
     }
 
     @Test
     public void shouldValidateUserWithCorrectCredentials() throws Exception {
-        User user = Library.getLibraryUserList().get(0);
-        String password = user.getPassword();
-        assertTrue(library.validateUserCredentials(user, password));
+        User mockUser = mock(User.class);
+        when(mockUser.getPassword()).thenReturn("password");
+        String password = mockUser.getPassword();
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateUserCredentials(mockUser, password)).thenReturn(true);
+        assertTrue(mockLibrary.validateUserCredentials(mockUser, password));
+        verify(mockUser).getPassword();
+        verify(mockLibrary).validateUserCredentials(mockUser, password);
     }
 
     @Test
     public void shouldInvalidateUserWithIncorrectCredentials() throws Exception {
-        User user = Library.getLibraryUserList().get(0);
+        User mockUser = mock(User.class);
+        when(mockUser.getPassword()).thenReturn("password");
         String incorrectPass = "incorrect_pass";
-        assertFalse(library.validateUserCredentials(user, incorrectPass));
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateUserCredentials(mockUser, incorrectPass)).thenReturn(false);
+        assertFalse(mockLibrary.validateUserCredentials(mockUser, incorrectPass));
+        verify(mockLibrary).validateUserCredentials(mockUser, incorrectPass);
     }
 
     @Test
@@ -73,11 +80,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutBook(validBookTitle))
                 .thenReturn("Thank you! Enjoy the book.");
-        mockLibrary.validateAndCheckOutBook(validBookTitle);
-        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
-
         assertEquals("Thank you! Enjoy the book.",
                 mockLibrary.validateAndCheckOutBook(validBookTitle));
+        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
     }
 
     @Test
@@ -85,11 +90,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutMovie(validMovieTitle))
                 .thenReturn("Thank you! Enjoy the movie.");
-        mockLibrary.validateAndCheckOutMovie(validMovieTitle);
-        verify(mockLibrary).validateAndCheckOutMovie(validMovieTitle);
-
         assertEquals("Thank you! Enjoy the movie.",
-                library.validateAndCheckOutMovie(validMovieTitle));
+                mockLibrary.validateAndCheckOutMovie(validMovieTitle));
+        verify(mockLibrary).validateAndCheckOutMovie(validMovieTitle);
     }
 
     @Test
@@ -97,10 +100,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutBook(validBookTitle))
                 .thenReturn("That book is currently checked out.");
-        mockLibrary.validateAndCheckOutBook(validBookTitle);
-        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
         assertEquals("That book is currently checked out.",
                 mockLibrary.validateAndCheckOutBook(validBookTitle));
+        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
     }
 
     @Test
@@ -108,11 +110,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutMovie(validMovieTitle))
                 .thenReturn("That movie is currently checked out.");
-        mockLibrary.validateAndCheckOutMovie(validMovieTitle);
-        verify(mockLibrary).validateAndCheckOutMovie(validMovieTitle);
-
         assertEquals("That movie is currently checked out.",
                 mockLibrary.validateAndCheckOutMovie(validMovieTitle));
+        verify(mockLibrary).validateAndCheckOutMovie(validMovieTitle);
     }
 
     @Test
@@ -120,11 +120,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutBook(invalidItemTitle))
                 .thenReturn("That book is not available.");
-        mockLibrary.validateAndCheckOutBook(invalidItemTitle);
-        verify(mockLibrary).validateAndCheckOutBook(invalidItemTitle);
-
         assertEquals("That book is not available.",
                 mockLibrary.validateAndCheckOutBook(invalidItemTitle));
+        verify(mockLibrary).validateAndCheckOutBook(invalidItemTitle);
     }
 
     @Test
@@ -132,11 +130,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckOutMovie(invalidItemTitle))
                 .thenReturn("That movie is not available.");
-        mockLibrary.validateAndCheckOutMovie(invalidItemTitle);
-        verify(mockLibrary).validateAndCheckOutMovie(invalidItemTitle);
-
         assertEquals("That movie is not available.",
                 mockLibrary.validateAndCheckOutMovie(invalidItemTitle));
+        verify(mockLibrary).validateAndCheckOutMovie(invalidItemTitle);
     }
 
     @Test
@@ -144,11 +140,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInBook(validBookTitle))
                 .thenReturn("Thank you for returning the book.");
-        mockLibrary.validateAndCheckInBook(validBookTitle);
-        verify(mockLibrary).validateAndCheckInBook(validBookTitle);
-
         assertEquals("Thank you for returning the book.",
                 mockLibrary.validateAndCheckInBook(validBookTitle));
+        verify(mockLibrary).validateAndCheckInBook(validBookTitle);
     }
 
     @Test
@@ -156,11 +150,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInMovie(validMovieTitle))
                 .thenReturn("Thank you for returning the movie.");
-        mockLibrary.validateAndCheckInMovie(validMovieTitle);
-        verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
-
         assertEquals("Thank you for returning the movie.",
                 mockLibrary.validateAndCheckInMovie(validMovieTitle));
+        verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
     }
 
     @Test
@@ -168,11 +160,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInBook(validBookTitle))
                 .thenReturn("That book is not currently checked out.");
-        mockLibrary.validateAndCheckInBook(validBookTitle);
-        verify(mockLibrary).validateAndCheckInBook(validBookTitle);
-
         assertEquals("That book is not currently checked out.",
                 mockLibrary.validateAndCheckInBook(validBookTitle));
+        verify(mockLibrary).validateAndCheckInBook(validBookTitle);
     }
 
     @Test
@@ -180,11 +170,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInMovie(validMovieTitle))
                 .thenReturn("That movie is not currently checked out.");
-        mockLibrary.validateAndCheckInMovie(validMovieTitle);
-        verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
-
         assertEquals("That movie is not currently checked out.",
                 mockLibrary.validateAndCheckInMovie(validMovieTitle));
+        verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
     }
 
     @Test
@@ -192,11 +180,9 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInBook(invalidItemTitle))
                 .thenReturn("That is not a valid book to return.");
-        mockLibrary.validateAndCheckInBook(invalidItemTitle);
-        verify(mockLibrary).validateAndCheckInBook(invalidItemTitle);
-
         assertEquals("That is not a valid book to return.",
                 mockLibrary.validateAndCheckInBook(invalidItemTitle));
+        verify(mockLibrary).validateAndCheckInBook(invalidItemTitle);
     }
 
     @Test
@@ -204,10 +190,8 @@ public class LibraryTest {
         Library mockLibrary = mock(Library.class);
         when(mockLibrary.validateAndCheckInMovie(invalidItemTitle))
                 .thenReturn("That is not a valid movie to return.");
-        mockLibrary.validateAndCheckInMovie(invalidItemTitle);
-        verify(mockLibrary).validateAndCheckInMovie(invalidItemTitle);
-
         assertEquals("That is not a valid movie to return.",
                 mockLibrary.validateAndCheckInMovie(invalidItemTitle));
+        verify(mockLibrary).validateAndCheckInMovie(invalidItemTitle);
     }
 }
