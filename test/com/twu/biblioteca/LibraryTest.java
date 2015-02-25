@@ -2,8 +2,10 @@ package com.twu.biblioteca;
 
 import static org.mockito.Mockito.*;
 
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -28,28 +30,23 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldInitialiseLibraryBookListWithTenBooks() throws Exception {
-        assertEquals(10, Library.getLibraryBookList().size());
-    }
-
-    @Test
-    public void shouldInitialiseLibraryMovieListWithTenMovies() throws Exception {
-        assertEquals(10, Library.getLibraryMovieList().size());
-    }
-
-    @Test
-    public void shouldInitialiseLibraryUserListWithTwoUsers() throws Exception {
-        assertEquals(2, Library.getLibraryUserList().size());
-    }
-
-    @Test
     public void shouldValidateCorrectLibraryNumber() throws Exception {
-        assertTrue(library.validateLibraryNumber("123-4567"));
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateLibraryNumber("123-4567")).thenReturn(true);
+        mockLibrary.validateLibraryNumber("123-4567");
+        verify(mockLibrary).validateLibraryNumber("123-4567");
+
+        assertTrue(mockLibrary.validateLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
-        assertFalse(library.validateLibraryNumber("1234567"));
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateLibraryNumber("1234567")).thenReturn(false);
+        mockLibrary.validateLibraryNumber("1234567");
+        verify(mockLibrary).validateLibraryNumber("1234567");
+
+        assertFalse(mockLibrary.validateLibraryNumber("1234567"));
     }
 
     @Test
