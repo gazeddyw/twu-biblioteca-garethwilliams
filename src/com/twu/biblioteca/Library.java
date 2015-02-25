@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Library {
 
-    private static LibraryListsInterface libraryLists;
+    private static LibraryLists libraryLists;
 
-    public Library(LibraryListsInterface libraryLists) {
+    public Library(LibraryLists libraryLists) {
         this.libraryLists = libraryLists;
     }
 

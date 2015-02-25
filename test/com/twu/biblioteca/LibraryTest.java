@@ -21,7 +21,7 @@ public class LibraryTest {
 
     @Before
     public void setUp() throws Exception {
-        library = new Library(new MockLibraryLists());
+        library = new Library(new LibraryLists());
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Gareth Williams on 2/24/15.
  */
-public class LibraryLists implements LibraryListsInterface {
+public class LibraryLists {
 
     private static List<Book> libraryBookList;
     private static List<Movie> libraryMovieList;
@@ -18,7 +18,6 @@ public class LibraryLists implements LibraryListsInterface {
         initialiseLibraryUserList();
     }
 
-    @Override
     public void initialiseLibraryBookList() {
         libraryBookList = new ArrayList<Book>();
         for (int i = 0; i < 10; i++) {
@@ -27,7 +26,6 @@ public class LibraryLists implements LibraryListsInterface {
         }
     }
 
-    @Override
     public void initialiseLibraryMovieList() {
         libraryMovieList = new ArrayList<Movie>();
         for (int i = 0; i < 10; i++) {
@@ -36,7 +34,6 @@ public class LibraryLists implements LibraryListsInterface {
         }
     }
 
-    @Override
     public void initialiseLibraryUserList() {
         libraryUserList = new ArrayList<User>();
         User user = new User("123-4567", "password0",
@@ -47,17 +44,14 @@ public class LibraryLists implements LibraryListsInterface {
         libraryUserList.add(user);
     }
 
-    @Override
     public List<Book> getBooks() {
         return libraryBookList;
     }
 
-    @Override
     public List<Movie> getMovies() {
         return libraryMovieList;
     }
 
-    @Override
     public List<User> getUsers() {
         return libraryUserList;
     }
