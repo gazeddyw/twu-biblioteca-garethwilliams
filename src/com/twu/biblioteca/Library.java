@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Library {
 
-    private static LibraryLists libraryLists;
+    private static LibraryListsInterface libraryLists;
 
-    public Library(LibraryLists libraryLists) {
+    public Library(LibraryListsInterface libraryLists) {
         this.libraryLists = libraryLists;
     }
 
@@ -26,7 +26,7 @@ public class Library {
         return libraryLists.getUsers();
     }
 
-    public static boolean validateLibraryNumber(String libNumber) {
+    public boolean validateLibraryNumber(String libNumber) {
         for (int index = 0; index < getLibraryUserList().size(); index++) {
             User user = getLibraryUserList().get(index);
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
@@ -36,7 +36,7 @@ public class Library {
         return false;
     }
 
-    public static User findUserByLibraryNumber(String libNumber) {
+    public User findUserByLibraryNumber(String libNumber) {
         for (int index = 0; index < getLibraryUserList().size(); index++) {
             User user = getLibraryUserList().get(index);
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
@@ -46,7 +46,7 @@ public class Library {
         return null;
     }
 
-    public static boolean validateUserCredentials(User user, String password) {
+    public boolean validateUserCredentials(User user, String password) {
         if (user.getPassword().equals(password)) {
             return true;
         } else {
@@ -54,7 +54,7 @@ public class Library {
         }
     }
 
-    public static String validateAndCheckOutBook(String title) {
+    public String validateAndCheckOutBook(String title) {
         for (Book book : getLibraryBookList()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 return book.checkOut();
@@ -63,7 +63,7 @@ public class Library {
         return "That book is not available.";
     }
 
-    public static String validateAndCheckOutMovie(String title) {
+    public String validateAndCheckOutMovie(String title) {
         for (Movie movie : getLibraryMovieList()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
                 return movie.checkOut();
@@ -72,7 +72,7 @@ public class Library {
         return "That movie is not available.";
     }
 
-    public static String validateAndCheckInBook(String title) {
+    public String validateAndCheckInBook(String title) {
         for (Book book : getLibraryBookList()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 return book.checkIn();
@@ -81,7 +81,7 @@ public class Library {
         return "That is not a valid book to return.";
     }
 
-    public static String validateAndCheckInMovie(String title) {
+    public String validateAndCheckInMovie(String title) {
         for (Movie movie : getLibraryMovieList()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
                 return movie.checkIn();

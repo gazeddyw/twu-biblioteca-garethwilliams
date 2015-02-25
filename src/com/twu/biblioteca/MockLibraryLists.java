@@ -6,13 +6,12 @@ import java.util.List;
 /**
  * Created by Gareth Williams on 2/24/15.
  */
-public class LibraryLists implements LibraryListsInterface {
-
+public class MockLibraryLists implements LibraryListsInterface {
     private static List<Book> libraryBookList;
     private static List<Movie> libraryMovieList;
     private static List<User> libraryUserList;
 
-    public LibraryLists() {
+    public MockLibraryLists() {
         initialiseLibraryBookList();
         initialiseLibraryMovieList();
         initialiseLibraryUserList();

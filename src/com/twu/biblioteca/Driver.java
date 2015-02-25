@@ -35,16 +35,16 @@ public class Driver {
             currentUser = null;
             System.out.println("Please enter Library Number (form: xxx-xxxx):");
             libNumber = getUserStringInput();
-            correctLibNumber = Library.validateLibraryNumber(libNumber);
+            correctLibNumber = library.validateLibraryNumber(libNumber);
             if (!correctLibNumber) {
                 System.out.println("Incorrect Library Number");
             }
         } while(!correctLibNumber);
-        currentUser = Library.findUserByLibraryNumber(libNumber);
+        currentUser = library.findUserByLibraryNumber(libNumber);
         do {
             System.out.println("Password:");
             password = getUserStringInput();
-            correctPassword = Library.validateUserCredentials(currentUser, password);
+            correctPassword = library.validateUserCredentials(currentUser, password);
         } while (!correctPassword);
         System.out.println();
     }
@@ -143,28 +143,28 @@ public class Driver {
     private void showCheckOutBookPrompt() {
         System.out.println("Enter title of book to check out:");
         String input = scanner.nextLine();
-        String message = Library.validateAndCheckOutBook(input);
+        String message = library.validateAndCheckOutBook(input);
         System.out.println(message + "\n");
     }
 
     private void showCheckOutMoviePrompt() {
         System.out.println("Enter title of movie to check out:");
         String input = scanner.nextLine();
-        String message = Library.validateAndCheckOutMovie(input);
+        String message = library.validateAndCheckOutMovie(input);
         System.out.println(message + "\n");
     }
 
     private void showCheckInBookPrompt() {
         System.out.println("Enter title of book to check in:");
         String input = scanner.nextLine();
-        String message = Library.validateAndCheckInBook(input);
+        String message = library.validateAndCheckInBook(input);
         System.out.println(message + "\n");
     }
 
     private void showCheckInMoviePrompt() {
         System.out.println("Enter title of movie to check out:");
         String input = scanner.nextLine();
-        String message = Library.validateAndCheckInMovie(input);
+        String message = library.validateAndCheckInMovie(input);
         System.out.println(message + "\n");
     }
 
