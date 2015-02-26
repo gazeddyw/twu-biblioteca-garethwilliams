@@ -53,8 +53,12 @@ public class Library {
     }
 
     public String validateAndCheckOutBook(String title) {
+        User currentUser = Driver.getCurrentUser();
         for (Book book : getLibraryBookList()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
+                if (!book.isCheckedOut()) {
+                    currentUser.addBook(book);
+                }
                 return book.checkOut();
             }
         }
@@ -62,8 +66,12 @@ public class Library {
     }
 
     public String validateAndCheckOutMovie(String title) {
+        User currentUser = Driver.getCurrentUser();
         for (Movie movie : getLibraryMovieList()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
+                if (!movie.isCheckedOut()) {
+                    currentUser.addMovie(movie);
+                }
                 return movie.checkOut();
             }
         }
@@ -71,18 +79,26 @@ public class Library {
     }
 
     public String validateAndCheckInBook(String title) {
+        User currentUser = Driver.getCurrentUser();
         for (Book book : getLibraryBookList()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
-                return book.checkIn();
+                if (currentUser.isBookHeldByUser(book)) {
+                    currentUser.removeBook(book);
+                    return book.checkIn();
+                }
             }
         }
         return "That is not a valid book to return.";
     }
 
     public String validateAndCheckInMovie(String title) {
+        User currentUser = Driver.getCurrentUser();
         for (Movie movie : getLibraryMovieList()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
-                return movie.checkIn();
+                if (currentUser.isMovieHeldByUser(movie)) {
+                    currentUser.removeMovie(movie);
+                    return movie.checkIn();
+                }
             }
         }
         return "That is not a valid movie to return.";

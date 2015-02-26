@@ -11,9 +11,9 @@ public class Driver {
     private static final int MAX_MENU_CHOICE = 6;
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
-    Library library;
-    Scanner scanner;
-    User currentUser;
+    private Library library;
+    private Scanner scanner;
+    private static User currentUser;
 
     public void run() {
         library = new Library(new LibraryLists());
@@ -23,6 +23,10 @@ public class Driver {
             handleLogIn();
             showMainMenu();
         }
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     private void handleLogIn() {
@@ -44,7 +48,7 @@ public class Driver {
         do {
             System.out.println("Password:");
             password = getUserStringInput();
-            correctPassword = library.validateUserCredentials(currentUser, password);
+            correctPassword = library.validateUserCredentials(getCurrentUser(), password);
         } while (!correctPassword);
         System.out.println();
     }
@@ -82,9 +86,9 @@ public class Driver {
 
     private void printUserDetails() {
         System.out.println("Your details:\n");
-        System.out.println("Name:\t\t\t" + currentUser.getName());
-        System.out.println("Email:\t\t\t" + currentUser.getEmail());
-        System.out.println("Phone:\t\t\t" + currentUser.getPhoneNumber());
+        System.out.println("Name:\t\t\t" + getCurrentUser().getName());
+        System.out.println("Email:\t\t\t" + getCurrentUser().getEmail());
+        System.out.println("Phone:\t\t\t" + getCurrentUser().getPhoneNumber());
         System.out.println();
     }
 
@@ -162,7 +166,7 @@ public class Driver {
     }
 
     private void showCheckInMoviePrompt() {
-        System.out.println("Enter title of movie to check out:");
+        System.out.println("Enter title of movie to check in:");
         String input = scanner.nextLine();
         String message = library.validateAndCheckInMovie(input);
         System.out.println(message + "\n");

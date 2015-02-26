@@ -194,4 +194,24 @@ public class LibraryTest {
                 mockLibrary.validateAndCheckInMovie(invalidItemTitle));
         verify(mockLibrary).validateAndCheckInMovie(invalidItemTitle);
     }
+
+    @Test
+    public void shouldNotCheckInBookCheckedOutByOtherUser() throws Exception {
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateAndCheckInBook(validBookTitle))
+                .thenReturn("That is not a valid book to return.");
+        assertEquals("That is not a valid book to return.",
+                mockLibrary.validateAndCheckInBook(validBookTitle));
+        verify(mockLibrary).validateAndCheckInBook(validBookTitle);
+    }
+
+    @Test
+    public void shouldNotCheckInMovieCheckedOutByOtherUser() throws Exception {
+        Library mockLibrary = mock(Library.class);
+        when(mockLibrary.validateAndCheckInMovie(validMovieTitle))
+                .thenReturn("That is not a valid movie to return.");
+        assertEquals("That is not a valid movie to return.",
+                mockLibrary.validateAndCheckInMovie(validMovieTitle));
+        verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
+    }
 }

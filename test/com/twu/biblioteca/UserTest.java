@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Gareth Williams on 2/23/15.
@@ -44,6 +45,32 @@ public class UserTest {
     }
 
     @Test
-    public void testUserCheckOutAddsBookToList() throws Exception {
+    public void shouldAddBookToListWhenBookCheckedOut() throws Exception {
+        Book mockBook = mock(Book.class);
+        myFirstUser.addBook(mockBook);
+        assertEquals(myFirstUser.getBooksCheckedOut().size(), 1);
+    }
+
+    @Test
+    public void shouldRemoveBookFromListWhenBookCheckedIn() throws Exception {
+        Book mockBook = mock(Book.class);
+        myFirstUser.addBook(mockBook);
+        myFirstUser.removeBook(mockBook);
+        assertEquals(myFirstUser.getBooksCheckedOut().size(), 0);
+    }
+
+    @Test
+    public void shouldAddMovieToListWhenMovieCheckedOut() throws Exception {
+        Movie mockMovie = mock(Movie.class);
+        myFirstUser.addMovie(mockMovie);
+        assertEquals(myFirstUser.getMoviesCheckedOut().size(), 1);
+    }
+
+    @Test
+    public void shouldRemoveMovieFromListWhenMovieCheckedIn() throws Exception {
+        Movie mockMovie = mock(Movie.class);
+        myFirstUser.addMovie(mockMovie);
+        myFirstUser.removeMovie(mockMovie);
+        assertEquals(myFirstUser.getMoviesCheckedOut().size(), 0);
     }
 }
