@@ -7,19 +7,19 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * Created by Gareth Williams on 2/25/15.
+ * Created by Gareth Williams on 2/26/15.
  */
-public class BibliotecaAppTest {
+public class DriverTest {
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void shouldCallInitMethod() throws Exception {
-        BibliotecaApp mockApp = mock(BibliotecaApp.class);
-        doThrow(new RuntimeException()).when(mockApp).init();
+    public void shouldCallRunMethod() throws Exception {
+        Driver mockDriver = mock(Driver.class);
+        doThrow(new RuntimeException()).when(mockDriver).run();
 
         exception.expect(RuntimeException.class);
-        mockApp.init();
+        mockDriver.run();
     }
 }
