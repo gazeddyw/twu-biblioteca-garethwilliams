@@ -6,7 +6,7 @@ public class BibliotecaApp {
         new BibliotecaApp().init();
     }
 
-    private void init() {
+    public void init() {
         Driver d = new Driver();
         d.run();
     }
