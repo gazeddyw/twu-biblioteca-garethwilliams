@@ -1,7 +1,10 @@
 package com.twu.biblioteca;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.*;
+import org.mockito.Mock;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,12 +17,22 @@ public class BibliotecaAppTest {
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    @Test
-    public void shouldCallInitMethod() throws Exception {
-        BibliotecaApp mockApp = mock(BibliotecaApp.class);
-        doThrow(new RuntimeException()).when(mockApp).init();
+    private BibliotecaApp ba;
 
-        exception.expect(RuntimeException.class);
-        mockApp.init();
+    @Mock
+    private Driver mockDriver;
+
+    @Before
+    public void setup() {
+        initMocks(this);
+        ba = new BibliotecaApp();
+    }
+
+    @Test (expected = Exception.class)
+    public void shouldCallRunMethod() throws Exception {
+        //Driver mockDriver = mock(Driver.class);
+        doThrow(new Exception()).when(mockDriver).run();
+        ba.init();
+        verify(mockDriver).run();
     }
 }
