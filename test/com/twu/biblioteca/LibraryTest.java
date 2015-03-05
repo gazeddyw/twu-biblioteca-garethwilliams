@@ -50,32 +50,32 @@ public class LibraryTest {
 
     @Test
     public void shouldValidateCorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
         assertTrue(library.validateLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
         assertFalse(library.validateLibraryNumber("1234567"));
     }
 
     @Test
     public void shouldFindUserByLibraryNumberWithCorrectNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
         assertEquals(mockLibraryLists.getUsers().get(0), library.findUserByLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldValidateUserWithCorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
-        assertTrue(library.validateUserCredentials(setupUsers().get(0),
+        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
+        assertTrue(library.validateUserCredentials(TestData.setupUsers().get(0),
                 "password0"));
     }
 
     @Test
     public void shouldInvalidateUserWithIncorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
         when(mockUser.getPassword()).thenReturn("password");
         String incorrectPass = "incorrect_pass";
         assertFalse(library.validateUserCredentials(mockUser, incorrectPass));
@@ -84,7 +84,7 @@ public class LibraryTest {
     @Test
     public void shouldCheckOutValidBookWithCorrectName() throws Exception {
         library.setCurrentUser(mockUser);
-        when(mockLibraryLists.getBooks()).thenReturn(setupBooks());
+        when(mockLibraryLists.getBooks()).thenReturn(TestData.setupBooks());
 
         assertEquals("Thank you! Enjoy the book.",
                 library.validateAndCheckOutBook(validBookTitle));
@@ -94,7 +94,7 @@ public class LibraryTest {
     @Test
     public void shouldCheckOutValidMovieWithCorrectName() throws Exception {
         library.setCurrentUser(mockUser);
-        when(mockLibraryLists.getMovies()).thenReturn(setupMovies());
+        when(mockLibraryLists.getMovies()).thenReturn(TestData.setupMovies());
         assertEquals("Thank you! Enjoy the movie.",
                 library.validateAndCheckOutMovie(validMovieTitle));
         verify(mockUser).addMovie(mockLibraryLists.getMovies().get(0));
@@ -103,7 +103,7 @@ public class LibraryTest {
     @Test
     public void shouldNotCheckOutValidBookAlreadyCheckedOut() throws Exception {
         library.setCurrentUser(mockUser);
-        when(mockLibraryLists.getBooks()).thenReturn(setupBooks());
+        when(mockLibraryLists.getBooks()).thenReturn(TestData.setupBooks());
         mockLibraryLists.getBooks().get(0).checkOut();
         assertEquals("That book is currently checked out.",
                 library.validateAndCheckOutBook(validBookTitle));
@@ -218,34 +218,5 @@ public class LibraryTest {
         assertEquals("That is not a valid movie to return.",
                 mockLibrary.validateAndCheckInMovie(validMovieTitle));
         verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
-    }
-
-    private List<User> setupUsers() {
-        List<User> userList = new ArrayList<User>();
-        User user = new User("123-4567", "password0",
-                "Test User 0", "test0@test.com", "01234012340");
-        userList.add(user);
-        user = new User("234-5678", "password1",
-                "Test User 1", "test1@test.com", "06789567890");
-        userList.add(user);
-        return userList;
-    }
-
-    private List<Book> setupBooks() {
-        List<Book> bookList = new ArrayList<Book>();
-        for (int i = 0; i < 10; i++) {
-            Book book = new Book("Book " + i, "Author " + i, i + 2000);
-            bookList.add(book);
-        }
-        return bookList;
-    }
-
-    private List<Movie> setupMovies() {
-        List<Movie> movieList = new ArrayList<Movie>();
-        for (int i = 0; i < 10; i++) {
-            Movie movie = new Movie("Movie " + i, i + 2000, "Director " + i, i + 1);
-            movieList.add(movie);
-        }
-        return movieList;
     }
 }
