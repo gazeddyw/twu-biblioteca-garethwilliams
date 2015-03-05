@@ -37,28 +37,6 @@ public class Library {
         this.currentUser = currentUser;
     }
 
-    public boolean validateLibraryNumber(String libNumber) {
-        for (User user : getLibraryUserList()) {
-            if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public User findUserByLibraryNumber(String libNumber) {
-        for (User user : getLibraryUserList()) {
-            if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public boolean validateUserCredentials(User user, String password) {
-        return user.getPassword().equals(password);
-    }
-
     public String validateAndCheckOutBook(String title) {
         for (Book book : getLibraryBookList()) {
             if (book.getTitle().equalsIgnoreCase(title)) {

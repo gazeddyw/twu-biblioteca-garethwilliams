@@ -12,10 +12,12 @@ public class Driver {
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
     private Library library;
+    private Validator validator;
     private Scanner scanner;
 
     public void run() {
         library = new Library(new LibraryLists());
+        validator = new Validator();
         scanner = new Scanner(System.in);
 
         while(true) {
@@ -34,16 +36,16 @@ public class Driver {
             library.setCurrentUser(null);
             System.out.println("Please enter Library Number (form: xxx-xxxx):");
             libNumber = getUserStringInput();
-            correctLibNumber = library.validateLibraryNumber(libNumber);
+            correctLibNumber = validator.validateLibraryNumber(libNumber);
             if (!correctLibNumber) {
                 System.out.println("Incorrect Library Number");
             }
         } while(!correctLibNumber);
-        library.setCurrentUser(library.findUserByLibraryNumber(libNumber));
+        library.setCurrentUser(validator.findUserByLibraryNumber(libNumber));
         do {
             System.out.println("Password:");
             password = getUserStringInput();
-            correctPassword = library.validateUserCredentials(
+            correctPassword = validator.validateUserCredentials(
                     library.getCurrentUser(), password);
         } while (!correctPassword);
         System.out.println();

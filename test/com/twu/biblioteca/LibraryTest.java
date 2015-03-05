@@ -27,9 +27,6 @@ public class LibraryTest {
     private String validMovieTitle;
     private String invalidItemTitle;
 
-    private List<User> libraryUserList;
-    private List<Book> libraryBookList;
-
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
@@ -46,39 +43,6 @@ public class LibraryTest {
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
-    }
-
-    @Test
-    public void shouldValidateCorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
-        assertTrue(library.validateLibraryNumber("123-4567"));
-    }
-
-    @Test
-    public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
-        assertFalse(library.validateLibraryNumber("1234567"));
-    }
-
-    @Test
-    public void shouldFindUserByLibraryNumberWithCorrectNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
-        assertEquals(mockLibraryLists.getUsers().get(0), library.findUserByLibraryNumber("123-4567"));
-    }
-
-    @Test
-    public void shouldValidateUserWithCorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
-        assertTrue(library.validateUserCredentials(TestData.setupUsers().get(0),
-                "password0"));
-    }
-
-    @Test
-    public void shouldInvalidateUserWithIncorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(TestData.setupUsers());
-        when(mockUser.getPassword()).thenReturn("password");
-        String incorrectPass = "incorrect_pass";
-        assertFalse(library.validateUserCredentials(mockUser, incorrectPass));
     }
 
     @Test
