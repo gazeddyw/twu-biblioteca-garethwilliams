@@ -28,9 +28,10 @@ public class BibliotecaAppTest {
         ba = new BibliotecaApp();
     }
 
-    @Test (expected = Exception.class)
+    @Test
     public void shouldCallRunMethod() throws Exception {
         //Driver mockDriver = mock(Driver.class);
+        exception.expect(Exception.class);
         doThrow(new Exception()).when(mockDriver).run();
         ba.init();
         verify(mockDriver).run();

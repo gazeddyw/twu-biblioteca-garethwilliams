@@ -4,7 +4,9 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.*;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
@@ -26,11 +28,16 @@ public class LibraryTest {
     private String invalidItemTitle;
 
     private List<User> libraryUserList;
+    private List<Book> libraryBookList;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Mock private LibraryLists mockLibraryLists;
     @Mock private User mockUser;
     @Mock private Book mockBook;
     @Mock private Movie mockMovie;
+    @Mock private Driver mockDriver;
 
     @Before
     public void setUp() throws Exception {
@@ -39,37 +46,36 @@ public class LibraryTest {
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
-        libraryUserList = setupUsers();
     }
 
     @Test
     public void shouldValidateCorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
         assertTrue(library.validateLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
         assertFalse(library.validateLibraryNumber("1234567"));
     }
 
     @Test
     public void shouldFindUserByLibraryNumberWithCorrectNumber() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
-        assertEquals(libraryUserList.get(0), library.findUserByLibraryNumber("123-4567"));
+        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        assertEquals(mockLibraryLists.getUsers().get(0), library.findUserByLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldValidateUserWithCorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
-        assertTrue(library.validateUserCredentials(libraryUserList.get(0),
+        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
+        assertTrue(library.validateUserCredentials(setupUsers().get(0),
                 "password0"));
     }
 
     @Test
     public void shouldInvalidateUserWithIncorrectCredentials() throws Exception {
-        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        when(mockLibraryLists.getUsers()).thenReturn(setupUsers());
         when(mockUser.getPassword()).thenReturn("password");
         String incorrectPass = "incorrect_pass";
         assertFalse(library.validateUserCredentials(mockUser, incorrectPass));
@@ -77,32 +83,31 @@ public class LibraryTest {
 
     @Test
     public void shouldCheckOutValidBookWithCorrectName() throws Exception {
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateAndCheckOutBook(validBookTitle))
-                .thenReturn("Thank you! Enjoy the book.");
+        library.setCurrentUser(mockUser);
+        when(mockLibraryLists.getBooks()).thenReturn(setupBooks());
+
         assertEquals("Thank you! Enjoy the book.",
-                mockLibrary.validateAndCheckOutBook(validBookTitle));
-        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
+                library.validateAndCheckOutBook(validBookTitle));
+        verify(mockUser).addBook(mockLibraryLists.getBooks().get(0));
     }
 
     @Test
     public void shouldCheckOutValidMovieWithCorrectName() throws Exception {
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateAndCheckOutMovie(validMovieTitle))
-                .thenReturn("Thank you! Enjoy the movie.");
+        library.setCurrentUser(mockUser);
+        when(mockLibraryLists.getMovies()).thenReturn(setupMovies());
         assertEquals("Thank you! Enjoy the movie.",
-                mockLibrary.validateAndCheckOutMovie(validMovieTitle));
-        verify(mockLibrary).validateAndCheckOutMovie(validMovieTitle);
+                library.validateAndCheckOutMovie(validMovieTitle));
+        verify(mockUser).addMovie(mockLibraryLists.getMovies().get(0));
     }
 
     @Test
     public void shouldNotCheckOutValidBookAlreadyCheckedOut() throws Exception {
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateAndCheckOutBook(validBookTitle))
-                .thenReturn("That book is currently checked out.");
+        library.setCurrentUser(mockUser);
+        when(mockLibraryLists.getBooks()).thenReturn(setupBooks());
+        mockLibraryLists.getBooks().get(0).checkOut();
         assertEquals("That book is currently checked out.",
-                mockLibrary.validateAndCheckOutBook(validBookTitle));
-        verify(mockLibrary).validateAndCheckOutBook(validBookTitle);
+                library.validateAndCheckOutBook(validBookTitle));
+        verify(mockUser, never()).addBook(mockLibraryLists.getBooks().get(0));
     }
 
     @Test
@@ -224,5 +229,23 @@ public class LibraryTest {
                 "Test User 1", "test1@test.com", "06789567890");
         userList.add(user);
         return userList;
+    }
+
+    private List<Book> setupBooks() {
+        List<Book> bookList = new ArrayList<Book>();
+        for (int i = 0; i < 10; i++) {
+            Book book = new Book("Book " + i, "Author " + i, i + 2000);
+            bookList.add(book);
+        }
+        return bookList;
+    }
+
+    private List<Movie> setupMovies() {
+        List<Movie> movieList = new ArrayList<Movie>();
+        for (int i = 0; i < 10; i++) {
+            Movie movie = new Movie("Movie " + i, i + 2000, "Director " + i, i + 1);
+            movieList.add(movie);
+        }
+        return movieList;
     }
 }

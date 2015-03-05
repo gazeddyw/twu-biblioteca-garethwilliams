@@ -13,7 +13,6 @@ public class Driver {
 
     private Library library;
     private Scanner scanner;
-    private static User currentUser;
 
     public void run() {
         library = new Library(new LibraryLists());
@@ -25,10 +24,6 @@ public class Driver {
         }
     }
 
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
     private void handleLogIn() {
         boolean correctLibNumber = false;
         boolean correctPassword = false;
@@ -36,7 +31,7 @@ public class Driver {
         String password;
 
         do {
-            currentUser = null;
+            library.setCurrentUser(null);
             System.out.println("Please enter Library Number (form: xxx-xxxx):");
             libNumber = getUserStringInput();
             correctLibNumber = library.validateLibraryNumber(libNumber);
@@ -44,11 +39,12 @@ public class Driver {
                 System.out.println("Incorrect Library Number");
             }
         } while(!correctLibNumber);
-        currentUser = library.findUserByLibraryNumber(libNumber);
+        library.setCurrentUser(library.findUserByLibraryNumber(libNumber));
         do {
             System.out.println("Password:");
             password = getUserStringInput();
-            correctPassword = library.validateUserCredentials(getCurrentUser(), password);
+            correctPassword = library.validateUserCredentials(
+                    library.getCurrentUser(), password);
         } while (!correctPassword);
         System.out.println();
     }
@@ -86,9 +82,9 @@ public class Driver {
 
     private void printUserDetails() {
         System.out.println("Your details:\n");
-        System.out.println("Name:\t\t\t" + getCurrentUser().getName());
-        System.out.println("Email:\t\t\t" + getCurrentUser().getEmail());
-        System.out.println("Phone:\t\t\t" + getCurrentUser().getPhoneNumber());
+        System.out.println("Name:\t\t\t" + library.getCurrentUser().getName());
+        System.out.println("Email:\t\t\t" + library.getCurrentUser().getEmail());
+        System.out.println("Phone:\t\t\t" + library.getCurrentUser().getPhoneNumber());
         System.out.println();
     }
 
