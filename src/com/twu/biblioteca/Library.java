@@ -45,11 +45,7 @@ public class Library {
     }
 
     public boolean validateUserCredentials(User user, String password) {
-        if (user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getPassword().equals(password);
     }
 
     public String validateAndCheckOutBook(String title) {
