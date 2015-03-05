@@ -1,11 +1,14 @@
 package com.twu.biblioteca;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.*;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,63 +19,60 @@ import static org.junit.Assert.assertTrue;
  */
 public class LibraryTest {
 
-    String validBookTitle;
-    String validMovieTitle;
-    String invalidItemTitle;
+    private Library library;
+
+    private String validBookTitle;
+    private String validMovieTitle;
+    private String invalidItemTitle;
+
+    private List<User> libraryUserList;
+
+    @Mock private LibraryLists mockLibraryLists;
+    @Mock private User mockUser;
+    @Mock private Book mockBook;
+    @Mock private Movie mockMovie;
 
     @Before
     public void setUp() throws Exception {
+        initMocks(this);
+        library = new Library(mockLibraryLists);
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
+        libraryUserList = setupUsers();
     }
 
     @Test
     public void shouldValidateCorrectLibraryNumber() throws Exception {
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateLibraryNumber("123-4567")).thenReturn(true);
-        assertTrue(mockLibrary.validateLibraryNumber("123-4567"));
-        verify(mockLibrary).validateLibraryNumber("123-4567");
+        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        assertTrue(library.validateLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldInvalidateIncorrectLibraryNumber() throws Exception {
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateLibraryNumber("1234567")).thenReturn(false);
-        assertFalse(mockLibrary.validateLibraryNumber("1234567"));
-        verify(mockLibrary).validateLibraryNumber("1234567");
+        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        assertFalse(library.validateLibraryNumber("1234567"));
     }
 
     @Test
     public void shouldFindUserByLibraryNumberWithCorrectNumber() throws Exception {
-        User testUser = new User("123-4567", "", "", "", "");
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.findUserByLibraryNumber("123-4567")).thenReturn(testUser);
-        assertEquals(testUser, mockLibrary.findUserByLibraryNumber("123-4567"));
-        verify(mockLibrary).findUserByLibraryNumber("123-4567");
+        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        assertEquals(libraryUserList.get(0), library.findUserByLibraryNumber("123-4567"));
     }
 
     @Test
     public void shouldValidateUserWithCorrectCredentials() throws Exception {
-        User mockUser = mock(User.class);
-        when(mockUser.getPassword()).thenReturn("password");
-        String password = mockUser.getPassword();
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateUserCredentials(mockUser, password)).thenReturn(true);
-        assertTrue(mockLibrary.validateUserCredentials(mockUser, password));
-        verify(mockUser).getPassword();
-        verify(mockLibrary).validateUserCredentials(mockUser, password);
+        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
+        assertTrue(library.validateUserCredentials(libraryUserList.get(0),
+                "password0"));
     }
 
     @Test
     public void shouldInvalidateUserWithIncorrectCredentials() throws Exception {
-        User mockUser = mock(User.class);
+        when(mockLibraryLists.getUsers()).thenReturn(libraryUserList);
         when(mockUser.getPassword()).thenReturn("password");
         String incorrectPass = "incorrect_pass";
-        Library mockLibrary = mock(Library.class);
-        when(mockLibrary.validateUserCredentials(mockUser, incorrectPass)).thenReturn(false);
-        assertFalse(mockLibrary.validateUserCredentials(mockUser, incorrectPass));
-        verify(mockLibrary).validateUserCredentials(mockUser, incorrectPass);
+        assertFalse(library.validateUserCredentials(mockUser, incorrectPass));
     }
 
     @Test
@@ -213,5 +213,16 @@ public class LibraryTest {
         assertEquals("That is not a valid movie to return.",
                 mockLibrary.validateAndCheckInMovie(validMovieTitle));
         verify(mockLibrary).validateAndCheckInMovie(validMovieTitle);
+    }
+
+    private List<User> setupUsers() {
+        List<User> userList = new ArrayList<User>();
+        User user = new User("123-4567", "password0",
+                "Test User 0", "test0@test.com", "01234012340");
+        userList.add(user);
+        user = new User("234-5678", "password1",
+                "Test User 1", "test1@test.com", "06789567890");
+        userList.add(user);
+        return userList;
     }
 }
