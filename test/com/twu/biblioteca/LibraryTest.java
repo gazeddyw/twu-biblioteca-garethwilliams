@@ -54,7 +54,7 @@ public class LibraryTest {
         when(mockValidator.findBookByTitle(validBookTitle)).thenReturn(books.get(0));
         assertEquals("Thank you! Enjoy the book.",
                 library.validateAndCheckOutBook(validBookTitle));
-        verify(mockUser).addBook(mockLibraryLists.getBooks().get(0));
+        verify(mockUser).addBook(books.get(0));
     }
 
     @Test
@@ -72,10 +72,10 @@ public class LibraryTest {
         when(mockLibraryLists.getBooks()).thenReturn(TestData.setupBooks());
         List<Book> books = mockLibraryLists.getBooks();
         when(mockValidator.findBookByTitle(validBookTitle)).thenReturn(books.get(0));
-        mockLibraryLists.getBooks().get(0).checkOut();
+        books.get(0).checkOut();
         assertEquals("That book is currently checked out.",
                 library.validateAndCheckOutBook(validBookTitle));
-        verify(mockUser, never()).addBook(mockLibraryLists.getBooks().get(0));
+        verify(mockUser, never()).addBook(books.get(0));
     }
 
     @Test
