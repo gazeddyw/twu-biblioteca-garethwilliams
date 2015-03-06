@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Gareth Williams on 2/18/15.
@@ -11,9 +12,11 @@ public class Library {
     private User currentUser;
 
     private static LibraryLists libraryLists;
+    private Validator validator;
 
-    public Library(LibraryLists libraryLists) {
+    public Library(LibraryLists libraryLists, Validator validator) {
         this.libraryLists = libraryLists;
+        this.validator = validator;
         currentUser = null;
     }
 
@@ -38,15 +41,17 @@ public class Library {
     }
 
     public String validateAndCheckOutBook(String title) {
-        for (Book book : getLibraryBookList()) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
-                if (!book.isCheckedOut()) {
-                    getCurrentUser().addBook(book);
-                }
-                return book.checkOut();
-            }
+        Book book;
+        try {
+            book = validator.findBookByTitle(title);
+        } catch (NoSuchElementException nsee) {
+            return "That book is not available.";
         }
-        return "That book is not available.";
+        if (book.getTitle().equalsIgnoreCase(title) &&
+                !book.isCheckedOut()) {
+            getCurrentUser().addBook(book);
+        }
+        return book.checkOut();
     }
 
     public String validateAndCheckOutMovie(String title) {

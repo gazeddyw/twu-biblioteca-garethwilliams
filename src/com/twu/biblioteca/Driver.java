@@ -16,8 +16,8 @@ public class Driver {
     private Scanner scanner;
 
     public void run() {
-        library = new Library(new LibraryLists());
         validator = new Validator();
+        library = new Library(new LibraryLists(), validator);
         scanner = new Scanner(System.in);
 
         while(true) {

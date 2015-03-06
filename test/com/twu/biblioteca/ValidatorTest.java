@@ -26,12 +26,13 @@ public class ValidatorTest {
     public ExpectedException exception = org.junit.rules.ExpectedException.none();
 
     @Mock private LibraryLists mockLibraryLists;
+    @Mock private Validator mockValidator;
     @Mock private User mockUser;
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        library = new Library(mockLibraryLists);
+        library = new Library(mockLibraryLists, mockValidator);
         validator = new Validator();
     }
 

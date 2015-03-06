@@ -31,6 +31,7 @@ public class LibraryTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Mock private LibraryLists mockLibraryLists;
+    @Mock private Validator mockValidator;
     @Mock private User mockUser;
     @Mock private Book mockBook;
     @Mock private Movie mockMovie;
@@ -39,7 +40,7 @@ public class LibraryTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        library = new Library(mockLibraryLists);
+        library = new Library(mockLibraryLists, mockValidator);
         validBookTitle = "Book 0";
         validMovieTitle = "Movie 0";
         invalidItemTitle = "Invalid";
@@ -49,7 +50,8 @@ public class LibraryTest {
     public void shouldCheckOutValidBookWithCorrectName() throws Exception {
         library.setCurrentUser(mockUser);
         when(mockLibraryLists.getBooks()).thenReturn(TestData.setupBooks());
-
+        List<Book> books = mockLibraryLists.getBooks();
+        when(mockValidator.findBookByTitle(validBookTitle)).thenReturn(books.get(0));
         assertEquals("Thank you! Enjoy the book.",
                 library.validateAndCheckOutBook(validBookTitle));
         verify(mockUser).addBook(mockLibraryLists.getBooks().get(0));
@@ -68,6 +70,8 @@ public class LibraryTest {
     public void shouldNotCheckOutValidBookAlreadyCheckedOut() throws Exception {
         library.setCurrentUser(mockUser);
         when(mockLibraryLists.getBooks()).thenReturn(TestData.setupBooks());
+        List<Book> books = mockLibraryLists.getBooks();
+        when(mockValidator.findBookByTitle(validBookTitle)).thenReturn(books.get(0));
         mockLibraryLists.getBooks().get(0).checkOut();
         assertEquals("That book is currently checked out.",
                 library.validateAndCheckOutBook(validBookTitle));
