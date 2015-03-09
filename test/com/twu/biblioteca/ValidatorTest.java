@@ -32,8 +32,7 @@ public class ValidatorTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        library = new Library(mockLibraryLists, mockValidator);
-        validator = new Validator();
+        validator = new Validator(mockLibraryLists);
     }
 
     @Test

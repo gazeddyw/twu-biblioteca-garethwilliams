@@ -14,10 +14,12 @@ public class Driver {
     private Library library;
     private Validator validator;
     private Scanner scanner;
+    private LibraryLists libraryLists;
 
     public void run() {
-        validator = new Validator();
-        library = new Library(new LibraryLists(), validator);
+        libraryLists = new LibraryLists();
+        validator = new Validator(libraryLists);
+        library = new Library(libraryLists, validator);
         scanner = new Scanner(System.in);
 
         while(true) {
@@ -172,7 +174,7 @@ public class Driver {
 
     private void printBookList() {
         printBookListHeader();
-        for (Book book : Library.getLibraryBookList()) {
+        for (Book book : libraryLists.getBooks()) {
             if (!book.isCheckedOut()) {
                 System.out.println("\t" + book.getTitle() + "\t\t\t" +
                         book.getAuthor() + "\t\t\t" + book.getYearPublished());
@@ -183,7 +185,7 @@ public class Driver {
 
     private void printMovieList() {
         printMovieListHeader();
-        for (Movie movie : Library.getLibraryMovieList()) {
+        for (Movie movie : libraryLists.getMovies()) {
             if (!movie.isCheckedOut()) {
                 System.out.println("\t" + movie.getTitle() + "\t\t\t" +
                         movie.getDirector() + "\t\t\t" + movie.getYearPublished() +

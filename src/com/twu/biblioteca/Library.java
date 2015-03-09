@@ -20,18 +20,6 @@ public class Library {
         currentUser = null;
     }
 
-    public static List<Book> getLibraryBookList() {
-        return libraryLists.getBooks();
-    }
-
-    public static List<Movie> getLibraryMovieList() {
-        return libraryLists.getMovies();
-    }
-
-    public static List<User> getLibraryUserList() {
-        return libraryLists.getUsers();
-    }
-
     public User getCurrentUser() {
         return currentUser;
     }
@@ -55,7 +43,7 @@ public class Library {
     }
 
     public String validateAndCheckOutMovie(String title) {
-        for (Movie movie : getLibraryMovieList()) {
+        for (Movie movie : libraryLists.getMovies()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
                 if (!movie.isCheckedOut()) {
                     getCurrentUser().addMovie(movie);
@@ -67,7 +55,7 @@ public class Library {
     }
 
     public String validateAndCheckInBook(String title) {
-        for (Book book : getLibraryBookList()) {
+        for (Book book : libraryLists.getBooks()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 if (getCurrentUser().isBookHeldByUser(book)) {
                     getCurrentUser().removeBook(book);
@@ -79,7 +67,7 @@ public class Library {
     }
 
     public String validateAndCheckInMovie(String title) {
-        for (Movie movie : getLibraryMovieList()) {
+        for (Movie movie : libraryLists.getMovies()) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
                 if (getCurrentUser().isMovieHeldByUser(movie)) {
                     getCurrentUser().removeMovie(movie);

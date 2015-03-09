@@ -7,8 +7,14 @@ import java.util.NoSuchElementException;
  */
 public class Validator {
 
+    private LibraryLists libraryLists;
+
+    public Validator(LibraryLists libraryLists) {
+        this.libraryLists = libraryLists;
+    }
+
     public boolean validateLibraryNumber(String libNumber) {
-        for (User user : Library.getLibraryUserList()) {
+        for (User user : libraryLists.getUsers()) {
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
                 return true;
             }
@@ -17,7 +23,7 @@ public class Validator {
     }
 
     public User findUserByLibraryNumber(String libNumber) {
-        for (User user : Library.getLibraryUserList()) {
+        for (User user : libraryLists.getUsers()) {
             if (user.getLibraryNumber().equalsIgnoreCase(libNumber)) {
                 return user;
             }
@@ -30,7 +36,7 @@ public class Validator {
     }
 
     public Book findBookByTitle(String title) throws NoSuchElementException {
-        for (Book book : Library.getLibraryBookList()) {
+        for (Book book : libraryLists.getBooks()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 return book;
             }
