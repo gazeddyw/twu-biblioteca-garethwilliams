@@ -11,17 +11,19 @@ public class Driver {
     private static final int MAX_MENU_CHOICE = 6;
     private static final int MAX_LOANS_MENU_CHOICE = 3;
 
+    private LibraryLists libraryLists;
     private Library library;
     private Validator validator;
     private Scanner scanner;
-    private LibraryLists libraryLists;
+
+    public Driver(LibraryLists libraryLists, Validator validator, Library library, Scanner scanner) {
+        this.libraryLists = libraryLists;
+        this.validator = validator;
+        this.library = library;
+        this.scanner = scanner;
+    }
 
     public void run() {
-        libraryLists = new LibraryLists();
-        validator = new Validator(libraryLists);
-        library = new Library(libraryLists, validator);
-        scanner = new Scanner(System.in);
-
         while(true) {
             handleLogIn();
             showMainMenu();
